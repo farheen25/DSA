@@ -93,6 +93,27 @@ class Main {
 | Uniqueness + insertion order | `LinkedHashSet` |
 | Uniqueness + sorted order    | `TreeSet`       |
 
+
+| Type            | Ordered?          | Nulls?         | Thread-Safe? | Sorting | Speed     |
+| --------------- | ----------------- | -------------- | ------------ | ------- | --------- |
+| `HashMap`       | ❌ No              | ✅ One null key | ❌ No         | ❌ No    | ✅ Fastest |
+| `LinkedHashMap` | ✅ Insertion order | ✅ Yes          | ❌ No         | ❌ No    | ✅ Fast    |
+| `Hashtable`     | ❌ No              | ❌ No           | ✅ Yes        | ❌ No    | ❌ Slower  |
+| `TreeMap`       | ✅ Sorted          | ❌ No null key  | ❌ No         | ✅ Yes   | ⚠️ Slower |
+| `NavigableMap`  | ✅ Sorted + Nav    | ❌ No null key  | ❌ No         | ✅ Yes   | ⚠️ Slower |
+
+NavigableMap<Integer, String> map = new TreeMap<>();
+map.put(10, "A");
+map.put(20, "B");
+map.put(30, "C");
+
+System.out.println(map.lowerKey(25));    // 20 (just below)
+System.out.println(map.higherKey(20));   // 30 (just above)
+System.out.println(map.floorKey(20));    // 20 (equal or below)
+System.out.println(map.ceilingKey(21));  // 30 (equal or above)
+
+System.out.println(map.descendingMap()); // {30=C, 20=B, 10=A}
+
         
     }
 }
