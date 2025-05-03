@@ -67,7 +67,32 @@ class Main {
         pq.offer(0);
         pq.offer(100);
         System.out.println(pq);
-        
+		
+		Set when uniqueness is needed
+		
+		| Type            | Maintains Order?   | Sorted? | Notes                       |
+| --------------- | ------------------ | ------- | --------------------------- |
+| `HashSet`       | ❌ No order         | ❌ No    | Fast, common use            |
+| `LinkedHashSet` | ✅ Insertion order  | ❌ No    | Keeps items in insert order |
+| `TreeSet`       | ✅ Sorted (natural) | ✅ Yes   | Uses a `Tree`, slower       |
+
+        | Method               | Description                         | Example                                |
+| -------------------- | ----------------------------------- | -------------------------------------- |
+| `add(E e)`           | Adds element if not already present | `set.add("A")`                         |
+| `remove(Object o)`   | Removes element if present          | `set.remove("A")`                      |
+| `contains(Object o)` | Checks if element exists            | `set.contains("A")`                    |
+| `isEmpty()`          | Checks if set is empty              | `set.isEmpty()`                        |
+| `size()`             | Returns number of elements          | `set.size()`                           |
+| `clear()`            | Removes all elements                | `set.clear()`                          |
+| `iterator()`         | Returns an iterator for the set     | `Iterator<String> it = set.iterator()` |
+
+
+| Want...                      | Use...          |
+| ---------------------------- | --------------- |
+| Uniqueness, fast ops         | `HashSet`       |
+| Uniqueness + insertion order | `LinkedHashSet` |
+| Uniqueness + sorted order    | `TreeSet`       |
+
         
     }
 }
