@@ -1,0 +1,73 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        // List<Integer> list = new LinkedList<>();
+        // list.add(1);
+        // list.add(2);
+        // list.add(3);
+        // [1,2,3]
+        // ListIterator<Integer> iterator = list.listIterator();
+        // System.out.println(iterator.next());
+        // System.out.println(iterator.next());
+        // System.out.println(iterator.previous());
+        
+        //to convert arrayList to array
+        // List<Integer> alist = new ArrayList<>();
+        // alist.add(1);
+        // alist.add(2);
+        // alist.add(3);
+        // [1,2,3]
+        // Integer[] array = alist.toArray(new Integer[0]);
+        // for( int x : array)
+        // {
+        //     System.out.println(x);
+        // }
+        // for deque use array deque and for queues use linkedList, for stacks use stack or can use deQueue as a stack also
+        
+        //FIFO 
+        // Queue<Integer> q = new LinkedList<>();
+        // q.offer(1); // offer means adding elements
+        // q.offer(2);
+        
+        // System.out.println(q.peek()); //peek means get operation
+        // System.out.println(q.poll()); //poll means remove
+        // System.out.println(q.peek());
+        // System.out.println(q.isEmpty());
+        
+        //LIFO
+        // Stack<Integer> stack = new Stack<>();
+        // stack.push(1);
+        // stack.push(2);
+        
+        // while(!stack.isEmpty())
+        // {
+        //     System.out.println(stack.peek());
+        //     stack.pop();
+        // }
+        
+        // Use offerLast() + pollFirst() → FIFO
+        // Use offerFirst() + pollFirst() → LIFO
+        
+        //deque with FIFO implementation
+        // Deque<Integer> dq = new ArrayDeque<>();
+        // dq.offerLast(1);
+        // dq.offerLast(2);
+        // System.out.println(dq);
+        // System.out.println(dq.peekFirst());
+        // System.out.println(dq.pollFirst());
+        // System.out.println(dq.peekFirst());
+        
+        //doesn't maintain insertion orders
+        // the elements are in min heap
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.offer(1);
+        pq.offer(2);
+        pq.offer(0);
+        pq.offer(100);
+        System.out.println(pq);
+        
+        
+    }
+}
