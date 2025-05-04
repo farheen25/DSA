@@ -114,6 +114,51 @@ System.out.println(map.ceilingKey(21));  // 30 (equal or above)
 
 System.out.println(map.descendingMap()); // {30=C, 20=B, 10=A}
 
+| **Collection**    | **Operation** | **Time Complexity**           | **Space Complexity** | **Notes**                                                                |                                                                                                   |
+| ----------------- | ------------- | ----------------------------- | -------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| **ArrayList**     | `add`         | O(1) amortized                | O(n)                 | Appending at end; inserting elsewhere is O(n) due to shifting elements.  |                                                                                                   |
+|                   | `remove`      | O(n)                          |                      | Shifting elements after removal.                                         |                                                                                                   |
+|                   | `contains`    | O(n)                          |                      | Linear search.                                                           |                                                                                                   |
+|                   | `get`         | O(1)                          |                      | Direct index access.                                                     |                                                                                                   |
+| **LinkedList**    | `add`         | O(1) at ends                  | O(n)                 | Adding at head or tail is O(1); inserting elsewhere requires traversal.  |                                                                                                   |
+|                   | `remove`      | O(n)                          |                      | Requires traversal to find the node.                                     |                                                                                                   |
+|                   | `contains`    | O(n)                          |                      | Linear search.                                                           |                                                                                                   |
+|                   | `get`         | O(n)                          |                      | Requires traversal.                                                      |                                                                                                   |
+| **HashSet**       | `add`         | O(1) average, O(n) worst-case | O(n)                 | Backed by HashMap; worst-case due to hash collisions.                    |                                                                                                   |
+|                   | `remove`      | O(1) average, O(n) worst-case |                      |                                                                          |                                                                                                   |
+|                   | `contains`    | O(1) average, O(n) worst-case |                      |                                                                          |                                                                                                   |
+| **LinkedHashSet** | `add`         | O(1) average                  | O(n)                 | Maintains insertion order.                                               |                                                                                                   |
+|                   | `remove`      | O(1) average                  |                      |                                                                          |                                                                                                   |
+|                   | `contains`    | O(1) average                  |                      |                                                                          |                                                                                                   |
+| **TreeSet**       | `add`         | O(log n)                      | O(n)                 | Implemented as Red-Black tree.                                           |                                                                                                   |
+|                   | `remove`      | O(log n)                      |                      |                                                                          |                                                                                                   |
+|                   | `contains`    | O(log n)                      |                      |                                                                          |                                                                                                   |
+| **HashMap**       | `put`         | O(1) average, O(n) worst-case | O(n)                 | Worst-case due to hash collisions.                                       |                                                                                                   |
+|                   | `remove`      | O(1) average, O(n) worst-case |                      |                                                                          |                                                                                                   |
+|                   | `containsKey` | O(1) average, O(n) worst-case |                      |                                                                          |                                                                                                   |
+|                   | `get`         | O(1) average, O(n) worst-case |                      |                                                                          |                                                                                                   |
+| **LinkedHashMap** | `put`         | O(1) average                  | O(n)                 | Maintains insertion order.                                               |                                                                                                   |
+|                   | `remove`      | O(1) average                  |                      |                                                                          |                                                                                                   |
+|                   | `containsKey` | O(1) average                  |                      |                                                                          |                                                                                                   |
+|                   | `get`         | O(1) average                  |                      |                                                                          |                                                                                                   |
+| **TreeMap**       | `put`         | O(log n)                      | O(n)                 | Implemented as Red-Black tree.                                           |                                                                                                   |
+|                   | `remove`      | O(log n)                      |                      |                                                                          |                                                                                                   |
+|                   | `containsKey` | O(log n)                      |                      |                                                                          |                                                                                                   |
+|                   | `get`         | O(log n)                      |                      |                                                                          |                                                                                                   |
+| **PriorityQueue** | `add`         | O(log n)                      | O(n)                 | Implemented as a binary heap.                                            |                                                                                                   |
+|                   | `remove`      | O(n)                          |                      | Removing arbitrary elements is O(n); removing head is O(log n).          |                                                                                                   |
+|                   | `contains`    | O(n)                          |                      | Linear search.                                                           |                                                                                                   |
+|                   | `peek`        | O(1)                          |                      | Retrieves head without removal.                                          | ([CodingTechRoom][1], [Baeldung][2], [GeeksforGeeks][3], [GeeksforGeeks][4], [Stack Overflow][5]) |
+
+[1]: https://codingtechroom.com/question/time-complexity-set-java?utm_source=chatgpt.com "What is the Time Complexity of Set Operations in Java?"
+[2]: https://www.baeldung.com/java-collections-complexity?utm_source=chatgpt.com "Time Complexity of Java Collections - Baeldung"
+[3]: https://www.geeksforgeeks.org/time-and-space-complexity-of-linked-list/?utm_source=chatgpt.com "Time and Space Complexity of Linked List - GeeksforGeeks"
+[4]: https://www.geeksforgeeks.org/hashmap-containskey-method-in-java/?utm_source=chatgpt.com "HashMap containsKey() Method in Java - GeeksforGeeks"
+[5]: https://stackoverflow.com/questions/2864204/treemap-search-time-complexity?utm_source=chatgpt.com "java - TreeMap - Search Time Complexity - Stack Overflow"
+
+
         
     }
 }
+
+
