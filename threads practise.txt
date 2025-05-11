@@ -1,0 +1,38 @@
+//Thread implementation extending Thread class
+class Main {
+    public static void main(String[] args) {
+        System.out.println("main is starting");
+        Thread t1 = new Thread1("thread1");
+        // t1.setDaemon(true); 
+        t1.start();
+		Thread t2 = new Thread(new Thread2());
+        t2.setDaemon(false); 
+        t2.start();
+        System.out.println("main is exiting");
+    }
+}
+
+class Thread1 extends Thread {
+    public Thread1(String threadName) {
+        super(threadName);
+    }
+    
+    @Override
+    public void run() {
+        for(int i=0;i<5;i++)
+        {
+            System.out.println("inside "+ Thread.currentThread().getName()+ " " + i);
+        }
+    }
+}
+
+//Thread implementation implementing Runnable interface
+class Thread2 implements Runnable {
+    @Override
+    public void run() {
+       for(int i=0;i<5;i++)
+       {
+           System.out.println(Thread.currentThread() + "," + i);
+       }
+    }
+}
