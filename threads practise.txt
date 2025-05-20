@@ -36,3 +36,404 @@ class Thread2 implements Runnable {
        }
     }
 }
+
+Difference between volatile keyword and synchronized
+difference between volatile and synchronized in Java — both are used in multithreading, but serve different purposes
+
+
+| Feature     | `volatile`                     | `synchronized`                      |
+| ----------- | ------------------------------ | ----------------------------------- |
+| Visibility  | ✅ Guarantees visibility        | ✅ Guarantees visibility             |
+| Atomicity   | ❌ Not guaranteed               | ✅ Guaranteed                        |
+| Locking     | ❌ No locking                   | ✅ Uses locks                        |
+| Performance | ✅ Lightweight                  | ❌ Heavier due to lock management    |
+| Use case    | Simple flags, state indicators | Complex operations (e.g., counters) |
+
+example 1
+public class VolatileExample {
+    private static volatile boolean running = true;
+
+    public static void main(String[] args) {
+        Thread t = new Thread(() -> {
+            while (running) {
+                // keep working until running is false
+            }
+            System.out.println("Stopped.");
+        });
+
+        t.start();
+
+        try {
+            Thread.sleep(1000); // Let the thread run for a bit
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        running = false; // This change is visible to Thread t
+    }
+}
+
+✅ What it shows:
+One thread sets running = false.
+
+The other thread immediately sees it because running is volatile.
+
+example 2
+public class SynchronizedExample {
+    private static int counter = 0;
+
+    public static synchronized void increment() {
+        counter++;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                increment();
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                increment();
+            }
+        });
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+
+        System.out.println("Counter: " + counter); // Always prints 2000
+    }
+}
+✅ What it shows:
+increment() is synchronized, so only one thread can execute it at a time.
+
+Prevents race conditions — ensures the final count is correct.
+
+| Use `volatile` when:                                 |
+| ---------------------------------------------------- |
+| - You need to share a **flag/state** between threads |
+| - Only one thread writes, others read                |
+
+| Use `synchronized` when:                  |
+| ----------------------------------------- |
+| - You need **atomic operations**          |
+| - Multiple threads **modify shared data** |
+
+| Problem                                             | Solution                            |
+| --------------------------------------------------- | ----------------------------------- |
+| Threads see stale or partially constructed instance | Use `volatile`                      |
+| Too much synchronization overhead                   | Use double-checked locking          |
+| Need thread-safe lazy initialization                | Combine `volatile` + `synchronized` |
+
+example for `volatile` + `synchronized`
+
+public class JuiceFactory {
+    private static volatile JuiceFactory factory; // 🧃 Shared & safe!
+
+    private JuiceFactory() {
+        System.out.println("🧃 Juice Factory is being built!");
+    }
+
+    public static JuiceFactory getFactory() {
+        if (factory == null) { // First check (no lock)
+            synchronized (JuiceFactory.class) { // Lock the gate! 🔐
+                if (factory == null) { // Second check (safe check)
+                    factory = new JuiceFactory(); // Build the factory 🏗️
+                }
+            }
+        }
+        return factory;
+    }
+}
+
+| Concept            | Meaning                                                      |
+| ------------------ | ------------------------------------------------------------ |
+| `volatile`         | 🧠 Ensures all goblins see the **same** factory, fully built |
+| `synchronized`     | 🔐 Stops goblins from building at the same time              |
+| Double-checking    | 👀 Fast for goblins who come **after** the factory is built  |
+| Without `volatile` | ❌ Goblins might use an **incomplete factory** (big danger!)  |
+
+Producer- Consumer Problem
+🧃🎁🍽️ Real-Life Analogy: Juice Shop
+Cast:
+🧃 Producer = The Juice Maker
+
+🍽️ Consumer = The Customer
+
+🎁 Buffer = The Counter (where juice is placed)
+
+Rules:
+The Juice Maker (Producer) makes juice and places it on the counter.
+
+The Customer (Consumer) takes the juice from the counter.
+
+The counter can only hold limited bottles (say, 5 max).
+
+If the counter is full, the Juice Maker has to wait.
+
+If the counter is empty, the Customer has to wait.
+
+This ensures smooth operation without fights or spills 😄
+
+🔧 The Problem in Code Terms
+You have:
+
+A Producer thread that adds items to a buffer.
+
+A Consumer thread that removes items from the buffer.
+
+You need synchronization so they don’t:
+
+Overfill the buffer ❌
+
+Try to remove from an empty buffer ❌
+
+✅ Java Example Using wait() and notify()
+java
+Copy
+Edit
+import java.util.LinkedList;
+
+public class JuiceShop {
+    private final int CAPACITY = 5;
+    private final LinkedList<String> counter = new LinkedList<>();
+
+    public void produce(String juice) throws InterruptedException {
+        synchronized (this) {
+            while (counter.size() == CAPACITY) {
+                System.out.println("🧃 Counter full. Juice Maker waits...");
+                wait(); // wait if full
+            }
+            counter.add(juice);
+            System.out.println("🧃 Juice Made: " + juice);
+            notify(); // notify consumer
+        }
+    }
+
+    public void consume() throws InterruptedException {
+        synchronized (this) {
+            while (counter.isEmpty()) {
+                System.out.println("🍽️ Counter empty. Customer waits...");
+                wait(); // wait if empty
+            }
+            String juice = counter.removeFirst();
+            System.out.println("🍽️ Juice Consumed: " + juice);
+            notify(); // notify producer
+        }
+    }
+}
+🚀 Main Program with Producer & Consumer Threads
+java
+Copy
+Edit
+public class JuiceShopDemo {
+    public static void main(String[] args) {
+        JuiceShop shop = new JuiceShop();
+
+        // Producer thread (Juice Maker 🧃)
+        Thread producer = new Thread(() -> {
+            int count = 1;
+            while (true) {
+                try {
+                    shop.produce("Juice " + count++);
+                    Thread.sleep(500); // delay to simulate making juice
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Consumer thread (Customer 🍽️)
+        Thread consumer = new Thread(() -> {
+            while (true) {
+                try {
+                    shop.consume();
+                    Thread.sleep(800); // delay to simulate drinking juice
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        producer.start();
+        consumer.start();
+    }
+}
+🎯 Output (Sample):
+yaml
+Copy
+Edit
+🧃 Juice Made: Juice 1
+🍽️ Juice Consumed: Juice 1
+🧃 Juice Made: Juice 2
+🧃 Juice Made: Juice 3
+🍽️ Juice Consumed: Juice 2
+...
+🧾 Summary Table
+Role	Action
+Producer	Produces item, waits if buffer full
+Consumer	Consumes item, waits if buffer empty
+Buffer	Shared resource with limited size
+wait()	Causes thread to pause and release lock
+notify()	Wakes up one waiting thread
+
+producer - consumer problem with blocking queue
+Let’s now simplify the Producer-Consumer Problem using Java’s BlockingQueue, which handles all the hard work (waiting and notifying) for you under the hood. 🚀
+
+✅ Why use BlockingQueue?
+Automatically handles thread safety, waiting, and notifying
+
+Makes your code cleaner and easier to read
+
+Perfect for producer-consumer scenarios
+
+🧃🍽️ Juice Shop Example with BlockingQueue
+java
+Copy
+Edit
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class JuiceShop {
+    public static void main(String[] args) {
+        // Counter capacity is 5
+        BlockingQueue<String> counter = new ArrayBlockingQueue<>(5);
+
+        // Producer Thread (Juice Maker 🧃)
+        Thread producer = new Thread(() -> {
+            int juiceNumber = 1;
+            while (true) {
+                try {
+                    String juice = "Juice " + juiceNumber++;
+                    counter.put(juice); // waits if counter is full
+                    System.out.println("🧃 Made: " + juice);
+                    Thread.sleep(500); // simulate making time
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+
+        // Consumer Thread (Customer 🍽️)
+        Thread consumer = new Thread(() -> {
+            while (true) {
+                try {
+                    String juice = counter.take(); // waits if counter is empty
+                    System.out.println("🍽️ Drank: " + juice);
+                    Thread.sleep(800); // simulate drinking time
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+
+        // Start both threads
+        producer.start();
+        consumer.start();
+    }
+}
+🔍 How it Works
+Method	What it does
+put(item)	Adds item to queue, waits if full
+take()	Removes item from queue, waits if empty
+BlockingQueue	Handles synchronization internally ✅
+
+🧪 Sample Output:
+yaml
+Copy
+Edit
+🧃 Made: Juice 1
+🍽️ Drank: Juice 1
+🧃 Made: Juice 2
+🧃 Made: Juice 3
+🍽️ Drank: Juice 2
+...
+🧾 Summary
+Using BlockingQueue simplifies producer-consumer logic:
+
+✅ No need for synchronized, wait, or notify
+✅ Cleaner and more robust
+✅ Safe for multi-threaded use
+
+Thread states
+NEW
+ ↓ start()
+RUNNABLE
+ ↓ (picked by CPU)
+RUNNING
+ ↙        ↘
+WAITING  TIMED_WAITING
+  ↓ notify()  ↓ timeout
+RUNNABLE ← BLOCKED (waiting for lock)
+ ↓ run ends
+TERMINATED
+
+What is Deadlock?
+A deadlock happens when two or more threads are waiting forever for each other to release resources, and none of them can proceed.
+
+🧠 In simple terms:
+Thread A is holding Resource 1 and waiting for Resource 2
+Thread B is holding Resource 2 and waiting for Resource 1
+➡️ Neither can move forward. Stuck forever.
+
+🍝 Real-Life Analogy: Fork and Spoon Dinner Party
+Two friends are eating spaghetti 🍝:
+
+Friend A has a fork, waiting for a spoon
+
+Friend B has a spoon, waiting for a fork
+
+Neither gives up what they’re holding. So both are stuck—deadlock!
+
+🔧 Java Code Example
+java
+Copy
+Edit
+public class DeadlockDemo {
+    static final Object fork = new Object();   // Resource 1
+    static final Object spoon = new Object();  // Resource 2
+
+    public static void main(String[] args) {
+        Thread friendA = new Thread(() -> {
+            synchronized (fork) {
+                System.out.println("Friend A: Holding fork...");
+                try { Thread.sleep(100); } catch (InterruptedException e) {}
+                System.out.println("Friend A: Waiting for spoon...");
+                synchronized (spoon) {
+                    System.out.println("Friend A: Got spoon and eating!");
+                }
+            }
+        });
+
+        Thread friendB = new Thread(() -> {
+            synchronized (spoon) {
+                System.out.println("Friend B: Holding spoon...");
+                try { Thread.sleep(100); } catch (InterruptedException e) {}
+                System.out.println("Friend B: Waiting for fork...");
+                synchronized (fork) {
+                    System.out.println("Friend B: Got fork and eating!");
+                }
+            }
+        });
+
+        friendA.start();
+        friendB.start();
+    }
+}
+🧨 What Happens Here?
+Friend A locks fork and sleeps.
+
+Friend B locks spoon and sleeps.
+
+A tries to lock spoon — blocked because B has it.
+
+B tries to lock fork — blocked because A has it.
+
+➡️ Both threads are waiting for each other → DEADLOCK 😵‍💫
+
+
+
+
