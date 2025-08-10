@@ -1,0 +1,53 @@
+Creational Design Patterns kya hote hain?
+Ye design patterns object creation process ko control karte hain, taki code flexible aur reusable ho.
+Simple shabdon me – "kaun, kab aur kaise object banayega" – iska control aapke paas hota hai.
+
+🛠 Types of Creational Design Patterns (emoji ke saath)
+Singleton Pattern 🏠
+
+Concept: Poore system me kisi class ka sirf ek hi object hona chahiye.
+
+Example: Colony ka ek hi paani ka tank 🚰 – sab waha se paani lete hain.
+
+Benefit: Memory bachta hai aur centralized control milta hai.
+
+Factory Method Pattern 🏭
+
+Concept: Object creation ki responsibility ek factory class ko do, taki client ko exact class ka pata na ho.
+
+Example: Pizza shop 🍕 – aap sirf "Veg" ya "Cheese Burst" bolte ho, kitchen decide karta hai kaunsa pizza class banani hai.
+
+Benefit: Naye product types easily add ho sakte hain bina client code change kiye.
+
+Abstract Factory Pattern 🏢
+
+Concept: Related objects ka poora family banane ke liye factory of factories ka use.
+
+Example: iPhone factory 📱 vs Samsung factory 📱 – dono phone, charger, earphones banate hain but apne-apne style me.
+
+Benefit: Pura product family easily switch kar sakte ho.
+
+Builder Pattern 🧱
+
+Concept: Complex object ko step-by-step build karna.
+
+Example: Subway sandwich 🥪 – pehle bread, fir vegetables, fir sauce, fir cheese… har step customize hota hai.
+
+Benefit: Object banate waqt zyada flexibility milti hai.
+
+Prototype Pattern 🐑
+
+Concept: Existing object ka clone banake use karna instead of new object creation har bar.
+
+Example: Photocopy machine 📄 – ek original document se multiple copies ban jati hain bina dobara likhe.
+
+Benefit: Time aur performance dono bachaata hai.
+
+📌 Summary Table
+Pattern	Emoji	Real-life Example
+Singleton	🏠	Colony ka 1 paani tank
+Factory Method	🏭	Pizza shop 🍕
+Abstract Factory	🏢	iPhone vs Samsung Factory 📱
+Builder	🧱	Subway Sandwich 🥪
+Prototype	🐑	Photocopy Machine 📄
+
