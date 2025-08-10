@@ -56,38 +56,44 @@ Prototype	🐑	Photocopy Machine 📄
 // Singleton Class
 public class WaterTank {
 
-    // 1. Ek hi static instance
-    private static WaterTank filled;
+    private static WaterTank filled; // Lazy initialization (null initially)
 
-    // 2. Private constructor - bahar se koi new nahi banayega
     private WaterTank() {
         System.out.println("Paani ka tank ban gaya! 🏠🚰");
     }
 
-    // 3. Public method jo wahi same instance return karega
     public static WaterTank fillWater() {
-        if (filled == null) {
+        if (filled == null) { // Object tabhi banega jab pehli baar call hoga
             filled = new WaterTank();
         }
         return filled;
     }
 
-    // 4. Water supply ka method
     public void supplyWater() {
         System.out.println("Water used by resident... 💧");
     }
 
-    // 5. Main method
     public static void main(String[] args) {
-        // Pehli baar tank banega
         WaterTank user1 = WaterTank.fillWater();
         user1.supplyWater();
 
-        // Dusri baar same tank ka reference milega
-        WaterTank user2 = WaterTank.getInstance();
+        WaterTank user2 = WaterTank.fillWater();
         user2.supplyWater();
 
-        // Check dono same object hain ya nahi
         System.out.println("Dono resident ne same water tank se pani bhara? " + (user1 == user2));
     }
 }
+
+
+
+Note:
+Eager Initialization vs Lazy Initialization
+Eager initialization: Agar tum object yahi pe create kar dete ho:
+
+private static WaterTank filled = new WaterTank(); 
+To class load hote hi tank ban jayega, chahe use ho ya na ho.
+
+Lazy initialization: Tum abhi jaise kar rahe ho:
+
+private static WaterTank filled;
+Aur object tabhi create hota hai jab pehli baar fillWater() call hota hai
