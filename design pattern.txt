@@ -97,3 +97,110 @@ Lazy initialization: Tum abhi jaise kar rahe ho:
 
 private static WaterTank filled;
 Aur object tabhi create hota hai jab pehli baar fillWater() call hota hai
+
+--------------------
+Factory Pattern
+Analogy: Car Manufacturing Factory 🚗
+
+Socho tum ek car buyer ho. Tum showroom me jaake kehte ho,
+
+“Mujhe ek SUV chahiye”
+ya
+“Mujhe ek Sedan chahiye”
+
+Tum showroom me khud engine, chassis, seats, tyres laga ke car assemble nahi karte.
+Instead, factory ke andar ek process hai jo tumhare requirement ke hisaab se car bana ke deta hai.
+
+Tum bas request karte ho type of car ka.
+
+Factory decide karti hai kaunsa model, kaunsa part use hoga, kaise assemble hoga.
+
+Tumhe ready-made product mil jata hai, aur tumhe creation ka detail pata bhi nahi hota.
+
+Programming me kaise match hota hai:
+
+Showroom → Factory class
+
+Customer → Client code
+
+SUV, Sedan → Different subclasses (Car types)
+
+Assembling process → Object creation logic
+
+Client code bas “mujhe SUV chahiye” bolta hai (method call karta hai),
+factory poora creation ka headache handle karke final object return kar deta hai.
+
+Isliye is pattern ka motto hota hai:
+
+"Don’t call new directly — let the factory build it for you."
+
+Step 1: Common Interface (Car)
+
+public interface Car {
+    void assemble();
+}
+
+Step 2: Different Car Types
+
+public class SUV implements Car {
+    @Override
+    public void assemble() {
+        System.out.println("Assembling an SUV with off-road features 🚙");
+    }
+}
+
+public class Sedan implements Car {
+    @Override
+    public void assemble() {
+        System.out.println("Assembling a Sedan with luxury features 🚗");
+    }
+}
+
+public class Hatchback implements Car {
+    @Override
+    public void assemble() {
+        System.out.println("Assembling a Hatchback with compact design 🚘");
+    }
+}
+
+Step 3: Car Factory
+
+public class CarFactory {
+    public Car createCar(String type) {
+        if (type == null || type.isEmpty()) {
+            return null;
+        }
+        switch (type.toUpperCase()) {
+            case "SUV":
+                return new SUV();
+            case "SEDAN":
+                return new Sedan();
+            case "HATCHBACK":
+                return new Hatchback();
+            default:
+                throw new IllegalArgumentException("Unknown car type: " + type);
+        }
+    }
+}
+
+Step 4: Client Code
+
+public class Main {
+    public static void main(String[] args) {
+        CarFactory factory = new CarFactory();
+
+        Car car1 = factory.createCar("SUV");
+        car1.assemble();
+
+        Car car2 = factory.createCar("SEDAN");
+        car2.assemble();
+
+        Car car3 = factory.createCar("HATCHBACK");
+        car3.assemble();
+    }
+}
+
+
+Assembling an SUV with off-road features 🚙
+Assembling a Sedan with luxury features 🚗
+Assembling a Hatchback with compact design 🚘
