@@ -204,3 +204,105 @@ public class Main {
 Assembling an SUV with off-road features 🚙
 Assembling a Sedan with luxury features 🚗
 Assembling a Hatchback with compact design 🚘
+
+--------------------------------------------------------
+Abstract Factory: UIFactory (methods: createButton(), createTextbox())
+
+Concrete Factories: WindowsFactory, MacFactory (apne platform ke components banate hain)
+
+Abstract Products: Button, Textbox (interfaces)
+
+Concrete Products: WindowsButton, MacButton, WindowsTextbox, MacTextbox
+
+// Abstract Products
+interface Button {
+    void paint();
+}
+
+interface Textbox {
+    void render();
+}
+
+// Concrete Products for Windows
+class WindowsButton implements Button {
+    public void paint() {
+        System.out.println("Rendering Windows style Button");
+    }
+}
+
+class WindowsTextbox implements Textbox {
+    public void render() {
+        System.out.println("Rendering Windows style Textbox");
+    }
+}
+
+// Concrete Products for Mac
+class MacButton implements Button {
+    public void paint() {
+        System.out.println("Rendering Mac style Button");
+    }
+}
+
+class MacTextbox implements Textbox {
+    public void render() {
+        System.out.println("Rendering Mac style Textbox");
+    }
+}
+
+// Abstract Factory
+interface UIFactory {
+    Button createButton();
+    Textbox createTextbox();
+}
+
+// Concrete Factory for Windows
+class WindowsFactory implements UIFactory {
+    public Button createButton() {
+        return new WindowsButton();
+    }
+    public Textbox createTextbox() {
+        return new WindowsTextbox();
+    }
+}
+
+// Concrete Factory for Mac
+class MacFactory implements UIFactory {
+    public Button createButton() {
+        return new MacButton();
+    }
+    public Textbox createTextbox() {
+        return new MacTextbox();
+    }
+}
+
+// Client code
+public class Application {
+    private Button button;
+    private Textbox textbox;
+
+    public Application(UIFactory factory) {
+        button = factory.createButton();
+        textbox = factory.createTextbox();
+    }
+
+    public void renderUI() {
+        button.paint();
+        textbox.render();
+    }
+
+    public static void main(String[] args) {
+        UIFactory factory;
+
+        // Let's say we detect the OS dynamically here (hardcoded for demo)
+        String osName = "Windows"; // change to "Mac" to test Mac UI
+
+        if (osName.equals("Windows")) {
+            factory = new WindowsFactory();
+        } else {
+            factory = new MacFactory();
+        }
+
+        Application app = new Application(factory);
+        app.renderUI();
+    }
+}
