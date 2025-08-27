@@ -306,3 +306,645 @@ public class Application {
         app.renderUI();
     }
 }
+
+| Pattern     | Type       | Purpose                              | Real Life Example                        |
+| ----------- | ---------- | ------------------------------------ | ---------------------------------------- |
+| **Builder** | Creational | Step-by-step complex object creation | Pizza customization, `StringBuilder`     |
+| **Adapter** | Structural | Bridge between incompatible classes  | Mobile charger plug adapter, JDBC driver |
+
+Builder pattern ek creational design pattern hai jo complex objects ko step-by-step construct karne ka tarika deta hai.
+Ye pattern construction process ko object ke representation se separate karta hai.
+
+public class StringBuilderExample {
+    public static void main(String[] args) {
+        // StringBuilder object banaya
+        StringBuilder sb = new StringBuilder();
+
+        // Step by step string build karna
+        sb.append("Hello");
+        sb.append(" ");
+        sb.append("World");
+        sb.append("!");
+        
+        // Final result
+        System.out.println(sb.toString());
+    }
+}
+
+Adapter pattern example:
+Suppose you have two buddies, one of them speaks French exclusively and the other English exclusively. The language barrier prevents them from communicating the way you want them to.
+
+Target (Interface) → EnglishSpeaker (jo client use karega)
+
+Adaptee → FrenchSpeaker (jo sirf French bolta hai)
+
+Adapter → FrenchToEnglishAdapter (jo French ko English me translate karke connect karega)
+
+// Target Interface
+interface EnglishSpeaker {
+    void speakEnglish(String words);
+}
+
+// Adaptee (French speaker)
+class FrenchSpeaker {
+    void parlerFrancais(String mots) {
+        System.out.println("Parle en Français: " + mots);
+    }
+}
+
+// Adapter (bridge between French and English)
+class FrenchToEnglishAdapter implements EnglishSpeaker {
+    private FrenchSpeaker frenchSpeaker;
+
+    public FrenchToEnglishAdapter(FrenchSpeaker frenchSpeaker) {
+        this.frenchSpeaker = frenchSpeaker;
+    }
+
+    @Override
+    public void speakEnglish(String words) {
+        // Adapter logic: English → French
+        System.out.println("Translating English to French...");
+        frenchSpeaker.parlerFrancais(words);
+    }
+}
+
+// Client code
+public class AdapterPatternDemo {
+    public static void main(String[] args) {
+        // Adaptee object
+        FrenchSpeaker frenchGuy = new FrenchSpeaker();
+
+        // Adapter wrapping the French speaker
+        EnglishSpeaker adapter = new FrenchToEnglishAdapter(frenchGuy);
+
+        // Client speaks in English, adapter translates
+        adapter.speakEnglish("Hello Friend!");
+    }
+}
+
+📌 Proxy Design Pattern – Notes
+
+Definition:
+A structural design pattern that provides a surrogate (stand-in) object which controls access to another object (the real subject).
+
+🔑 Key Points
+
+Acts as a middle layer between client and real object.
+
+Used for access control, lazy initialization, logging, caching, remote access.
+
+Follows the same interface as the real object.
+
+Types of Proxy:
+
+Virtual Proxy → loads heavy objects lazily (e.g., images).
+
+Protection Proxy → controls access (e.g., role-based access).
+
+Remote Proxy → represents an object in a different address space (e.g., RMI).
+
+Caching Proxy → returns cached results to improve performance.
+
+🏦 Real-World Examples
+
+ATM → Bank server (ATM is the proxy).
+
+Credit card → Bank account.
+
+Browser caching images or pages.
+
+✅ Structure
+
+Subject (Interface) → common contract.
+
+RealSubject → the actual object with core logic.
+
+Proxy → controls access to RealSubject.
+
+Client → uses Subject interface, unaware of Proxy/RealSubject difference.
+
+⚡ Advantages
+
+Adds security, logging, performance optimization.
+
+Client code stays simple & decoupled.
+
+⚠ Disadvantages
+
+Extra layer → slight performance overhead.
+
+Increases complexity.
+
+👉 One-liner:
+Proxy is a design pattern that provides a substitute object to control, enhance, or restrict access to the real object.
+
+Example
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+interface BankAccount {
+    void withDraw(String ac, double amount);
+}
+
+class RealAccount implements BankAccount {
+    @Override
+    public void withDraw(String ac, double amount) {
+        System.out.println("Withdrawing " + amount + " from account: " + ac);
+    }
+}
+
+class ProxyAccount implements BankAccount {
+    private RealAccount realAccount;
+    private String role;
+    
+    ProxyAccount(String role){
+        this.role = role;
+        realAccount = new RealAccount();
+    }
+    
+    @Override
+    public void withDraw(String ac, double amount) {
+        if(role == "ADMIN")
+        {
+           realAccount.withDraw(ac, amount); 
+        }
+        else {
+            System.out.println("role is not permitted");
+        }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+       BankAccount ba = new ProxyAccount("ADMIN");
+       ba.withDraw("1234",5000);
+       BankAccount ba1 = new ProxyAccount("USER");
+       ba1.withDraw("1234",50000);
+    }
+}
+----------------
+Decorator design pattern:
+Decorator Design Pattern – Short Notes
+
+Type: Structural Design Pattern
+
+Definition: Attaches additional responsibilities to an object dynamically.
+Open/Closed Principle Recap
+
+Open for extension → You can extend an object’s behavior.
+
+Closed for modification → You don’t need to change the existing class code.
+
+Analogy: Wrapping a gift box – each wrapper adds something new without changing the original gift.
+
+Key Components
+
+Component → Interface/abstract class defining behavior.
+
+Concrete Component → Base object with default behavior.
+
+Decorator (abstract) → Holds reference to a component, implements the same interface.
+
+Concrete Decorators → Extend functionality by overriding methods.
+
+Advantages
+
+Adds behavior at runtime (flexible than inheritance).
+
+Promotes open/closed principle (open for extension, closed for modification).
+
+Avoids class explosion caused by multiple subclasses.
+
+Disadvantages
+
+Can result in many small classes.
+
+Debugging can be harder due to multiple layers of wrapping.
+
+Example
+
+Coffee Shop: SimpleCoffee + decorators like Milk, Sugar, WhippedCream.
+
+Java I/O Streams: BufferedInputStream(new FileInputStream("file.txt")).
+
+👉 Use when: You need to add/remove features dynamically without altering the base class.
+
+Example:
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+interface Coffee {
+    String getDescription();
+    double getCost();
+}
+
+class PlainCoffee implements Coffee {
+    @Override
+    public String getDescription() {
+        return "Simple Coffee";
+    }
+    
+    @Override
+    public double getCost() {
+        return 5.0;
+    }
+}
+
+abstract class CoffeeDecorator implements Coffee {
+    protected Coffee coffee;
+    CoffeeDecorator(Coffee coffee) {
+        this.coffee = coffee;
+    }
+    
+    public String getDescription() {
+        return coffee.getDescription();
+    }
+    
+    public double getCost() {
+        return coffee.getCost();
+    }
+}
+
+class MilkDecorator extends CoffeeDecorator {
+    public MilkDecorator(Coffee coffee) {
+        super(coffee);
+    }
+    
+    public String getDescription() {
+        return coffee.getDescription() + ", Milk";
+    }
+    
+    public double getCost() {
+        return coffee.getCost() + 1.5;
+    }
+}
+
+class WhippedCreamDecorator extends CoffeeDecorator {
+    public WhippedCreamDecorator(Coffee coffee) {
+        super(coffee);
+    }
+    
+    public String getDescription() {
+        return coffee.getDescription() + ", Cream";
+    }
+    
+    public double getCost() {
+        return coffee.getCost() + 1;
+    }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+    public SugarDecorator(Coffee coffee) {
+        super(coffee);
+    }
+    
+    public String getDescription() {
+        return coffee.getDescription() + ", Sugar";
+    }
+    
+    public double getCost() {
+        return coffee.getCost() + 1;
+    }
+}
+
+
+class Main {
+    public static void main(String[] args) {
+      Coffee coffee = new PlainCoffee();
+      coffee = new MilkDecorator(coffee);
+      System.out.println(coffee.getDescription() + " -> $" + coffee.getCost());
+      coffee = new SugarDecorator(coffee);
+      System.out.println(coffee.getDescription() + " -> $" + coffee.getCost());
+      coffee = new WhippedCreamDecorator(coffee);
+      System.out.println(coffee.getDescription() + " -> $" + coffee.getCost());
+    }
+}
+
+------------------
+Facade Design Pattern – Short Notes
+
+Type: Structural Design Pattern
+
+Definition: Provides a unified, simplified interface to a set of complex subsystems.
+
+Analogy: Universal remote control – hides the complexity of multiple devices.
+
+Key Points
+
+Hides subsystem complexity from clients.
+
+Client interacts with one facade object instead of multiple subsystem classes.
+
+Subsystems remain unchanged; facade only orchestrates calls.
+
+Promotes loose coupling between client and subsystems.
+
+SOLID Principles
+
+SRP: Facade has one job → simplify subsystem usage.
+
+DIP: Client depends on Facade (abstraction), not on subsystem details.
+
+Advantages
+
+Simplifies client code.
+
+Reduces dependency between client and subsystems.
+
+Makes the system easier to use.
+
+Disadvantages
+
+Can become a god object if it grows too much.
+
+May hide too much flexibility of subsystems.
+
+Real-Time Examples
+
+Home Theater System: watchMovie() hides projector, DVD, sound setup.
+
+Banking App: transferMoney() hides authentication, debit/credit, logging, notifications.
+
+Java Libraries:
+
+javax.faces.context.FacesContext (JSF)
+
+java.net.URL (hides sockets, protocols, DNS handling)
+
+Spring’s JdbcTemplate (hides JDBC boilerplate).
+
+👉 In short: Facade makes complex things simple for the client without changing the subsystems.
+
+Example
+// Subsystem classes
+class AuthenticationService {
+    public boolean authenticate(String userId, String password) {
+        System.out.println("Authenticating user: " + userId);
+        return true; // assume always valid
+    }
+}
+
+class AccountService {
+    public boolean checkBalance(String accountId, double amount) {
+        System.out.println("Checking balance for " + accountId);
+        return true;
+    }
+
+    public void debit(String accountId, double amount) {
+        System.out.println("Debiting " + amount + " from " + accountId);
+    }
+
+    public void credit(String accountId, double amount) {
+        System.out.println("Crediting " + amount + " to " + accountId);
+    }
+}
+
+class TransactionLogger {
+    public void log(String message) {
+        System.out.println("Transaction Log: " + message);
+    }
+}
+
+class NotificationService {
+    public void notifyUser(String userId, String message) {
+        System.out.println("Notifying " + userId + ": " + message);
+    }
+}
+
+// Facade
+class BankingFacade {
+    private AuthenticationService authService;
+    private AccountService accountService;
+    private TransactionLogger logger;
+    private NotificationService notifier;
+
+    public BankingFacade() {
+        this.authService = new AuthenticationService();
+        this.accountService = new AccountService();
+        this.logger = new TransactionLogger();
+        this.notifier = new NotificationService();
+    }
+
+    public void transferMoney(String userId, String password, 
+                              String fromAcc, String toAcc, double amount) {
+        if (authService.authenticate(userId, password) 
+            && accountService.checkBalance(fromAcc, amount)) {
+            
+            accountService.debit(fromAcc, amount);
+            accountService.credit(toAcc, amount);
+            logger.log("Transfer of " + amount + " from " + fromAcc + " to " + toAcc);
+            notifier.notifyUser(userId, "Transfer Successful: " + amount);
+        } else {
+            System.out.println("Transfer failed!");
+        }
+    }
+}
+
+public class FacadeBankingDemo {
+    public static void main(String[] args) {
+        BankingFacade bankingFacade = new BankingFacade();
+        bankingFacade.transferMoney("user123", "password", "ACC1001", "ACC2002", 500.0);
+    }
+}
+-------------
+blueprint for adapter design pattern
+// 1. Target interface (expected by client)
+interface Target {
+    void request();
+}
+
+// 2. Adaptee (legacy / incompatible class)
+class Adaptee {
+    public void specificRequest() {
+        System.out.println("Called specificRequest() from Adaptee");
+    }
+}
+
+// 3. Adapter (makes Adaptee compatible with Target)
+class Adapter implements Target {
+    private Adaptee adaptee;
+
+    public Adapter(Adaptee adaptee) {
+        this.adaptee = adaptee;
+    }
+
+    @Override
+    public void request() {
+        // Translate request into Adaptee's method
+        adaptee.specificRequest();
+    }
+}
+
+// 4. Client (uses Target interface)
+public class AdapterPatternDemo {
+    public static void main(String[] args) {
+        Adaptee adaptee = new Adaptee();
+        
+        // Wrap adaptee in an adapter
+        Target target = new Adapter(adaptee);
+        
+        // Client uses Target interface
+        target.request();
+    }
+}
+
+-----------------
+blue print for proxy design pattern
+// 1. Subject (common interface)
+interface Subject {
+    void request();
+}
+
+// 2. RealSubject (actual implementation)
+class RealSubject implements Subject {
+    @Override
+    public void request() {
+        System.out.println("RealSubject: Handling the request.");
+    }
+}
+
+// 3. Proxy (controls access to RealSubject)
+class Proxy implements Subject {
+    private RealSubject realSubject;
+
+    @Override
+    public void request() {
+        if (realSubject == null) {
+            realSubject = new RealSubject(); // Lazy initialization
+        }
+
+        System.out.println("Proxy: Performing access control or logging before delegating.");
+        realSubject.request();
+    }
+}
+
+// 4. Client
+public class ProxyPatternDemo {
+    public static void main(String[] args) {
+        Subject proxy = new Proxy();
+
+        // Client calls proxy instead of directly using RealSubject
+        proxy.request();
+    }
+}
+----------------
+blueprint for facade design pattern
+// 1. Subsystem classes
+class SubsystemA {
+    void operationA() {
+        System.out.println("SubsystemA: operationA executed");
+    }
+}
+
+class SubsystemB {
+    void operationB() {
+        System.out.println("SubsystemB: operationB executed");
+    }
+}
+
+class SubsystemC {
+    void operationC() {
+        System.out.println("SubsystemC: operationC executed");
+    }
+}
+
+// 2. Facade (simplifies subsystem usage)
+class Facade {
+    private SubsystemA subsystemA;
+    private SubsystemB subsystemB;
+    private SubsystemC subsystemC;
+
+    public Facade() {
+        this.subsystemA = new SubsystemA();
+        this.subsystemB = new SubsystemB();
+        this.subsystemC = new SubsystemC();
+    }
+
+    // Unified method that hides complexity
+    public void simpleOperation() {
+        System.out.println("Facade: Coordinating subsystems...");
+        subsystemA.operationA();
+        subsystemB.operationB();
+        subsystemC.operationC();
+    }
+}
+
+// 3. Client
+public class FacadePatternDemo {
+    public static void main(String[] args) {
+        Facade facade = new Facade();
+        
+        // Client calls only the Facade method
+        facade.simpleOperation();
+    }
+}
+
+-----------------
+blueprint for decorator design pattern
+// 1. Component
+interface Component {
+    void operation();
+}
+
+// 2. Concrete Component
+class ConcreteComponent implements Component {
+    @Override
+    public void operation() {
+        System.out.println("ConcreteComponent: Base operation");
+    }
+}
+
+// 3. Decorator (abstract class)
+abstract class Decorator implements Component {
+    protected Component component;
+
+    public Decorator(Component component) {
+        this.component = component;
+    }
+
+    @Override
+    public void operation() {
+        component.operation(); // delegate to wrapped object
+    }
+}
+
+// 4. Concrete Decorators
+class ConcreteDecoratorA extends Decorator {
+    public ConcreteDecoratorA(Component component) {
+        super(component);
+    }
+
+    @Override
+    public void operation() {
+        super.operation(); // call base behavior
+        System.out.println("ConcreteDecoratorA: Added behavior A");
+    }
+}
+
+class ConcreteDecoratorB extends Decorator {
+    public ConcreteDecoratorB(Component component) {
+        super(component);
+    }
+
+    @Override
+    public void operation() {
+        super.operation(); // call base behavior
+        System.out.println("ConcreteDecoratorB: Added behavior B");
+    }
+}
+
+// 5. Client
+public class DecoratorPatternDemo {
+    public static void main(String[] args) {
+        Component component = new ConcreteComponent();
+
+        // Wrap with DecoratorA
+        Component decoratedA = new ConcreteDecoratorA(component);
+
+        // Wrap with DecoratorB on top of DecoratorA
+        Component decoratedB = new ConcreteDecoratorB(decoratedA);
+
+        // Call operation
+        decoratedB.operation();
+    }
+}
+
