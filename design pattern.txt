@@ -947,4 +947,118 @@ public class DecoratorPatternDemo {
         decoratedB.operation();
     }
 }
+----
+Observer design pattern ek behavioral design pattern hai jo one-to-many dependency establish karta hai. Matlab agar ek object (Subject) ka state change hota hai, toh usse जुड़े huye saare objects (Observers) automatically update ho jaate hain.
 
+Real life Example:
+
+👉 WhatsApp Group
+
+Ek group admin (Subject) jab ek message bhejta hai, toh saare group members (Observers) ko turant notification milta hai.
+
+Agar koi member group chhod de, toh usse notifications milna band ho jaata hai.
+
+Components of Observer Pattern:
+
+Subject (Publisher)
+
+Jo object observe kiya jaa raha hai.
+
+Observers ko register/unregister karne ka kaam karta hai.
+
+Jab bhi state change hoti hai, observers ko notify karta hai.
+
+Observer (Subscriber)
+
+Subject ke state change ko "observe" karta hai.
+
+Jab bhi notification milti hai, apna kaam perform karta hai.
+
+Concrete Subject
+
+Actual implementation of Subject.
+
+Concrete Observer
+
+Actual implementation of Observer.
+
+UML Flow:
+Subject <---- Observer
+   ↑              ↑
+ConcreteSubject   ConcreteObserver
+
+Java Example:
+import java.util.*;
+
+// Observer interface
+interface Observer {
+    void update(String message);
+}
+
+// Subject interface
+interface Subject {
+    void registerObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObservers(String message);
+}
+
+// Concrete Subject
+class YouTubeChannel implements Subject {
+    private List<Observer> subscribers = new ArrayList<>();
+
+    public void registerObserver(Observer o) {
+        subscribers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        subscribers.remove(o);
+    }
+
+    public void notifyObservers(String message) {
+        for (Observer o : subscribers) {
+            o.update(message);
+        }
+    }
+
+    // When new video uploaded
+    public void uploadVideo(String title) {
+        System.out.println("New Video Uploaded: " + title);
+        notifyObservers("Check out new video: " + title);
+    }
+}
+
+// Concrete Observer
+class Subscriber implements Observer {
+    private String name;
+
+    Subscriber(String name) {
+        this.name = name;
+    }
+
+    public void update(String message) {
+        System.out.println(name + " got notification: " + message);
+    }
+}
+
+// Test
+public class ObserverPatternDemo {
+    public static void main(String[] args) {
+        YouTubeChannel channel = new YouTubeChannel();
+
+        Observer user1 = new Subscriber("Ali");
+        Observer user2 = new Subscriber("Sara");
+
+        channel.registerObserver(user1);
+        channel.registerObserver(user2);
+
+        channel.uploadVideo("Observer Design Pattern Explained!");
+    }
+}
+
+Output:
+New Video Uploaded: Observer Design Pattern Explained!
+Ali got notification: Check out new video: Observer Design Pattern Explained!
+Sara got notification: Check out new video: Observer Design Pattern Explained!
+
+
+✅ Key Point: Observer pattern loosely couples Publisher and Subscriber. Subject ko nahi pata hota ki observer kaise react karega, sirf notify kar deta hai.
