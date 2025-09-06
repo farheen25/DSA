@@ -948,7 +948,7 @@ public class DecoratorPatternDemo {
     }
 }
 ----
-Observer design pattern ek behavioral design pattern hai jo one-to-many dependency establish karta hai. Matlab agar ek object (Subject) ka state change hota hai, toh usse जुड़े huye saare objects (Observers) automatically update ho jaate hain.
+Observer design pattern ek behavioral design pattern hai jo one-to-many dependency establish karta hai. Matlab agar ek object (Subject) ka state change hota hai, toh usse related huye saare objects (Observers) automatically update ho jaate hain.
 
 Real life Example:
 
@@ -1062,3 +1062,180 @@ Sara got notification: Check out new video: Observer Design Pattern Explained!
 
 
 ✅ Key Point: Observer pattern loosely couples Publisher and Subscriber. Subject ko nahi pata hota ki observer kaise react karega, sirf notify kar deta hai.
+
+
+Notes: Observer Design Pattern
+
+Category: Behavioral Pattern
+
+Intent: “Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified automatically.”
+
+Use case: Jab ek object ka state change ho aur tumhe chahie ki automatically multiple objects ko update mile.
+
+Real-life Examples:
+
+YouTube channel (Subject) → Subscribers (Observers)
+
+Stock Market (Subject) → Investors (Observers)
+
+GUI Button (Subject) → Event Listeners (Observers)
+
+Pros
+✔ Loose coupling (Subject aur Observer ek interface ke through baat karte hain).
+✔ Easy to add new observers.
+
+Cons
+✘ Order of notification guarantee nahi hota.
+✘ Agar observers bahut heavy kaam karen to performance issue ho sakta hai.
+
+SOLID Principle: Follows Open/Closed Principle and Dependency Inversion.
+
+// Step 1: Observer interface
+interface Observer {
+    void update(String message);
+}
+
+// Step 2: Subject interface
+interface Subject {
+    void registerObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObservers(String message);
+}
+
+// Step 3: Concrete Subject
+class NewsChannel implements Subject {
+    private List<Observer> observers = new ArrayList<>();
+
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers(String message) {
+        for (Observer o : observers) {
+            o.update(message);
+        }
+    }
+
+    // Example: new news comes
+    public void breakingNews(String news) {
+        notifyObservers(news);
+    }
+}
+
+// Step 4: Concrete Observers
+class Subscriber implements Observer {
+    private String name;
+
+    public Subscriber(String name) {
+        this.name = name;
+    }
+
+    public void update(String message) {
+        System.out.println(name + " received news: " + message);
+    }
+}
+
+// Step 5: Client
+public class ObserverPatternDemo {
+    public static void main(String[] args) {
+        NewsChannel channel = new NewsChannel();
+
+        Observer sub1 = new Subscriber("Farheen");
+        Observer sub2 = new Subscriber("Aisha");
+
+        channel.registerObserver(sub1);
+        channel.registerObserver(sub2);
+
+        channel.breakingNews("New Observer Pattern tutorial uploaded!");
+    }
+}
+
+Notes: Strategy Design Pattern
+
+Category: Behavioral Pattern
+
+Intent: “Define a family of algorithms, encapsulate each one, and make them interchangeable at runtime.”
+
+Use case: Jab ek kaam ke multiple tareeqe (algorithms) ho aur tum runtime pe decide karna chaho kaunsa use karna hai.
+
+Real-life Examples:
+
+Payment methods: Credit Card, PayPal, UPI
+
+Travel modes: Car, Train, Plane
+
+Sorting: QuickSort, MergeSort, BubbleSort
+
+Java: Comparator in Collections framework
+
+Pros
+✔ Algorithms ko alag classes me encapsulate karna (clean code).
+✔ Easily extendable → new algorithm add karna easy (Open/Closed Principle).
+✔ Avoids if-else or switch clutter.
+
+Cons
+✘ Clients ko strategies ke differences samajhne hote hain.
+✘ Zyada strategies banne pe number of classes badh jata hai.
+
+SOLID Principle: Follows Open/Closed Principle & Dependency Inversion Principle.
+
+// Step 1: Strategy interface
+interface TravelStrategy {
+    void travel(String source, String destination);
+}
+
+// Step 2: Concrete strategies
+class CarTravel implements TravelStrategy {
+    public void travel(String source, String destination) {
+        System.out.println("Traveling from " + source + " to " + destination + " by Car.");
+    }
+}
+
+class TrainTravel implements TravelStrategy {
+    public void travel(String source, String destination) {
+        System.out.println("Traveling from " + source + " to " + destination + " by Train.");
+    }
+}
+
+class PlaneTravel implements TravelStrategy {
+    public void travel(String source, String destination) {
+        System.out.println("Traveling from " + source + " to " + destination + " by Plane.");
+    }
+}
+
+// Step 3: Context
+class TravelContext {
+    private TravelStrategy strategy;
+
+    public TravelContext(TravelStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void startJourney(String source, String destination) {
+        strategy.travel(source, destination);
+    }
+}
+
+// Step 4: Client
+public class StrategyTravelDemo {
+    public static void main(String[] args) {
+        TravelContext context;
+
+        // User selects Car
+        context = new TravelContext(new CarTravel());
+        context.startJourney("Hyderabad", "Bangalore");
+
+        // User selects Train
+        context = new TravelContext(new TrainTravel());
+        context.startJourney("Hyderabad", "Bangalore");
+
+        // User selects Plane
+        context = new TravelContext(new PlaneTravel());
+        context.startJourney("Hyderabad", "Bangalore");
+    }
+}
+
