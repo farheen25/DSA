@@ -1,0 +1,9 @@
+Interview questions asked
+1. primary and qualifier annotations?
+2. How to deploy application to prod?
+3. How to connect to prod db's ?
+4. Explain your daily work?
+5. How you write tests?
+6. what is spring.profiles?
+7. use streams and write to returning last non repeating character in a string 
+String str = "Java" return v
