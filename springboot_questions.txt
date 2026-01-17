@@ -1,0 +1,1163 @@
+Round 1: Technical (45 Minutes)
+
+Java 8 and Project-Specific:
+1. What are the new features added in Java 8?
+2. What is Method Reference?
+3. What are Default Methods?
+4. Can you explain Intermediate Operations in Streams?
+5. What is HTTP Status Code 204?
+6. Can you explain the concept of Microservices in your project?
+7. What is Hashmap and hashtable?
+8. Explain the Authentication Layer in your project.
+9. How does JWT work?
+10. What is garbage collector? And how it is used?
+11. Can you explain how you integrate 3rd-party data in your project?
+
+Core Java:
+1. What is Method Hiding?
+2. Output of this -
+System.out.printin(Double.MIN_VALUE > 0.0d);
+3. If you add a null value to an empty Set, what will be the size of the Set?
+4. What is Garbage Collection?
+5. can you override static method in interface?
+6. Internal working of HashMap and what is Get() method?
+7. What is SOLID Principle?
+
+Spring Boot:
+1. @Lazy annotation
+2. @Component annotation
+3. What is Component Scanning?
+4. How to handle exception in Spring Boot?
+5. What is JPA?
+6. Explain about Bean Scope?
+7. @RequestParam
+8. @RequestBody
+9. What is path variable?
+10. What is @Generated Value annotation?
+
+SQL:
+1. You have a user table with 50 records. Write a query to retrieve 20 records starting from the 5th row. The result should include the user's first name and last name.
+2. You have two tables. Write a query using INNER JOIN to retrieve data. You can use any example data for this.
+
+1)What is OOP and its principles?
+2)Abstract class vs Interface
+3)Immutable class - why & how to create? 
+4) == vs equals
+5)hashCode () - why is it important?
+6)Comparable vs Comparator 
+7)Aggregation vs Composition 
+8)final vs finally vs finalize
+9)volatile keyword - where & why used? 
+10)sleep() vs wait() vs notify()
+11)ClassLoader and its types
+12)ArrayList vs LinkedList (time complexity)
+
+Java 8 & Concurrency (Frequently Asked)
+
+Java 8 features
+Stream API - why introduced?
+map() vs flatMap ()
+Optional - what problem does it solve?
+Future vs CompletableFuture
+How CompletableFuture works internally
+Synchronous vs Asynchronous execution
+
+Spring / Spring Boot (Interview Favorite)
+
+What is Spring Boot?
+What does @SpringBootApplication do internally?
+Stereotype annotations
+@Controller vs @RestController
+Spring MVC flow (behind the scenes)
+DispatcherServlet role
+Exception handling in Spring Boot @ControllerAdvice vs @ExceptionHandler
+Bean scopes
+Dependency Injection — why it matters
+
+JPA / Hibernate (Real Project Questions)
+
+What is JPA?
+JPA vs Hibernate
+EntityManager role save () vs persist)
+@Id & @GeneratedValue delete vs truncate vs drop
+How transactions work in JPA
+Multiple database configuration
+
+Microservices (High-Level + Practical)
+
+What is Microservice architecture?
+Benefits & challenges
+Service Registry
+Feign vs RestTemplate vs WebClient
+Feign vs Kafka
+API Gateway role
+Rate limiting strategies
+Circuit Breaker
+Saga pattern
+Choreography vs Orchestration
+2PC - why it's not preferred
+
+Kafka / Messaging Systems
+
+What is Kafka?
+Producer-Consumer flow
+Topic, Partition, Offset 
+Fault tolerance in Kafka 
+Kafka vs RabbitMQ
+
+Database / System Design Basics
+
+CAP theorem
+ACID properties
+SQL join types
+Index types & when to use them
+How Redis works internally
+What happens if Redis goes down?
+
+Design Patterns (Concept + Use Case)
+
+Singleton pattern
+How to break Singleton
+Builder pattern
+Proxy pattern
+
+Misc (Often Ignored, Still Asked)
+
+12-Factor App principles
+XML vs JSON
+XML Schema vs DTD
+Components of XML Schema
+
+-------------
+. Your Spring Boot app works locally but fails after deployment. What are the first 3 things you check?
+2. A REST API is slow only in production, not locally.
+How do you debug it?
+3. You changed application. properties but changes are not reflecting. Why?
+4. Your Spring Boot service crashes under high traffic.
+What could be the reasons?
+5. Multiple beans of the same type exist and Spring throws an error. How do you fix it?
+6. You need different configs for dev, test, and prod.
+How will you design this?
+7. Your API works fine but returns 401 randomly. What could cause this?
+8. A database connection pool is getting exhausted.
+How do you identify and solve it?
+9. How do you handle API failures when calling another microservice?
+10. Your application memory usage keeps increasing over time. What do you suspect?
+11. How do you implement retry logic for failed REST calls?
+12. You deployed a new version but users still hit the old behavior. Why?
+13. How do you secure sensitive values like DB passwords in Spring Boot?
+
+14. What happens if @Transactional fails midway?
+How do you verify rollback?
+15. Your logs are missing in production. Where do you look?
+16. How do you handle versioning of REST APIs without breaking clients?
+17. One microservice is down and others are failing.
+How do you prevent this?
+18. How do you reduce startup time of a Spring Boot application?
+19. You need to execute code only once after application startup. How?
+20. How do you handle long-running background jolos in Spring Boot?
+21. Your API returns correct data but response time is inconsistent. Why?
+22. How do you trace a request across multiple microservices?
+23. What strategy do you use for graceful shutdown of Spring Boot apps?
+24. How do you manage schema changes without breaking production?
+25. Your Spring Boot app fails only when deployed in Docker. Why?
+26. How do you implement rate limiting for APls?
+27. What happens if an exception occurs inside a filter or interceptor?
+28. How do you test production-like behavior locally?
+29. Your service needs zero downtime deployment.
+How do you achieve it?
+30. What are common mistakes freshers make in Spring Boot projects?
+
+1. Spring Boot Internals
+--------------------------
+ ➤ How does Spring Boot auto-configuration work internally?
+ ➤ What happens when Spring Boot application starts?
+ ➤ How does spring.factories or spring/org.springframework.boot.autoconfigure work?
+ ➤ How does Spring Boot decide which bean to create when multiple candidates exist?
+ ➤ What is @ConditionalOnProperty and how have you used it in production?
+ ➤ How does Spring Boot detect embedded Tomcat?
+ ➤ What happens if I exclude an auto-configuration class?
+ ➤ Difference between @EnableAutoConfiguration and @SpringBootApplication
+ ➤ How does Spring Boot load application.yml vs application.properties?
+ ➤ What is the bootstrap context in Spring Boot?
+
+2. Security
+-------------
+
+➤ How did you secure your REST APIs in production?
+➤ Difference between OAuth2, JWT, and Session-based auth
+➤ How does Spring Security filter chain work?
+➤ Where do you validate JWT token?
+➤ How do you handle token expiration?
+➤ How did you implement role-based access?
+➤ How to secure actuator endpoints?
+➤ How do you prevent CSRF in REST APIs?
+➤ How do you protect APIs from brute-force attacks?
+➤ What is stateless authentication?
+
+3. Database, JPA & Transactions
+-----------------------------------
+➤ What happens if two users update the same row at the same time?
+➤ Difference between Optimistic and Pessimistic locking
+➤ How do you handle transaction rollback in Spring Boot?
+➤ What happens if an exception occurs inside @Transactional?
+➤ Difference between save() and saveAndFlush()
+➤ How do you avoid N+1 problem?
+➤ How do you handle large data pagination?
+➤ How do you write native queries?
+➤ How do you improve JPA performance?
+➤ How do you handle connection pool issues?
+
+4. REST API Design
+----------------------
+➤ How do you design a versioned API?
+➤ Difference between PUT, PATCH, and POST
+➤ How do you handle validation errors?
+➤ How do you handle global exception handling?
+➤ How do you secure file uploads?
+➤ How do you handle API backward compatibility?
+➤ How do you log request and response?
+➤ How do you prevent SQL injection?
+
+5. Performance & Scalability
+--------------------------------
+➤ How do you scale Spring Boot application?
+➤ How do you handle high traffic?
+➤ How do you cache data?
+➤ Difference between in-memory cache and Redis
+➤ How do you tune JVM for Spring Boot?
+➤ How do you reduce startup time?
+➤ How do you avoid memory leaks?
+➤ What is connection pooling?
+➤ How do you handle thread pools?
+➤ How do you profile a slow API?
+
+6. Production & DevOps Questions
+-------------------------------------
+➤ What is blue-green deployment?
+➤ How do you externalize configuration?
+➤ How do you manage secrets?
+➤ How do you monitor Spring Boot app?
+➤ How do you do zero-downtime deployment?
+➤ How do you log in production?
+
+Spring Boot Internals
+Q1: How does Spring Boot auto-configuration work internally?
+
+Spring Boot auto-configuration works by scanning the classpath for available dependencies and beans, then automatically configuring Spring beans based on conditions. It uses @EnableAutoConfiguration and spring.factories to load classes annotated with @Configuration. Conditional annotations like @ConditionalOnClass or @ConditionalOnProperty control whether a configuration is applied. Internally, Spring Boot loads these configurations at startup in the application context, reducing manual bean configuration.
+
+Q2: What happens when a Spring Boot application starts?
+
+When a Spring Boot app starts:
+
+Bootstrap: SpringApplication initializes the application context.
+
+Environment setup: Loads properties from application.properties or application.yml.
+
+Component scanning: Detects beans annotated with @Component, @Service, @Repository, etc.
+
+Auto-configuration: Loads classes listed in spring.factories if their conditions are met.
+
+Embedded server startup: Starts Tomcat/Jetty/Netty if web app.
+
+ApplicationContext refresh: Beans are instantiated, dependencies injected, lifecycle events triggered.
+
+Application ready: Calls CommandLineRunner or ApplicationRunner.
+
+This ensures the application is fully initialized and ready to handle requests.
+
+Q3: How does spring.factories or spring/org.springframework.boot.autoconfigure work?
+
+spring.factories is a metadata file located in META-INF that lists auto-configuration classes and other factories. Spring Boot reads this file to discover which auto-configuration classes to load. For example, if spring-boot-starter-data-jpa is present, JpaAutoConfiguration is listed in spring.factories and loaded automatically if JPA is on the classpath. This is the backbone of Spring Boot’s convention-over-configuration mechanism.
+
+Q4: How does Spring Boot decide which bean to create when multiple candidates exist?
+
+Spring Boot uses the following rules:
+
+Primary beans (@Primary) are chosen over others.
+
+Qualifier annotations (@Qualifier) explicitly select the bean.
+
+If no primary or qualifier exists, Spring throws NoUniqueBeanDefinitionException.
+
+Conditional annotations like @ConditionalOnMissingBean can also control bean creation.
+
+Q5: What is @ConditionalOnProperty and how have you used it in production?
+
+@ConditionalOnProperty is used to enable or disable beans/configurations based on a property value. In production, I used it to enable features like caching or Swagger only when a property like app.feature.caching.enabled=true is set, preventing unnecessary beans from loading in environments where the feature isn’t required.
+
+Q6: How does Spring Boot detect embedded Tomcat?
+
+Spring Boot detects embedded Tomcat by checking the classpath for spring-boot-starter-web. The auto-configuration class TomcatEmbeddedServletContainerFactory is loaded, and Spring Boot instantiates an embedded Tomcat server. It’s automatically configured using properties from application.properties or application.yml.
+
+Q7: What happens if you exclude an auto-configuration class?
+
+Excluding an auto-configuration class prevents Spring Boot from automatically configuring beans related to that feature. For example, excluding DataSourceAutoConfiguration.class stops Spring Boot from automatically creating a DataSource. This is useful if you want custom configurations instead of the default.
+
+Q8: Difference between @EnableAutoConfiguration and @SpringBootApplication
+
+@EnableAutoConfiguration enables Spring Boot’s auto-configuration mechanism.
+
+@SpringBootApplication is a meta-annotation combining @EnableAutoConfiguration, @ComponentScan, and @Configuration.
+
+In practice, using @SpringBootApplication is sufficient for most applications.
+
+Q9: How does Spring Boot load application.yml vs application.properties?
+
+Spring Boot loads configuration in the following order:
+
+application.properties or application.yml in src/main/resources
+
+Profile-specific files like application-dev.properties
+
+Externalized configurations via environment variables, command-line args, or config servers
+YAML and properties are equivalent; YAML supports hierarchical structures. Spring converts YAML to properties internally.
+
+Q10: What is the bootstrap context in Spring Boot?
+
+The bootstrap context is a lightweight ApplicationContext loaded before the main application context. It’s typically used to load configuration from external sources, like Spring Cloud Config Server. Beans in the bootstrap context are available early, e.g., for property resolution, but are separate from the main application context.
+
+Q1: How did you secure your REST APIs in production?
+
+I secure REST APIs in production using a combination of authentication, authorization, and encryption.
+
+Authentication: Only authorized users or services can access APIs, implemented with JWT tokens, OAuth2, or API keys.
+
+Authorization: Role-based access control ensures users can only access allowed endpoints.
+
+Encryption: All API traffic is secured using HTTPS/TLS.
+
+Additional measures: Rate limiting, input validation, and monitoring for suspicious activity.
+
+Example: I used Spring Security with JWT tokens for stateless authentication, restricting endpoints to roles using @PreAuthorize annotations.
+
+Q2: Difference between OAuth2, JWT, and Session-based auth
+Feature	OAuth2	JWT	Session-based Auth
+Token	Access token issued by Authorization Server	Self-contained token with claims	Session ID stored on server
+Storage	Client holds token	Client holds token	Server holds session in memory/DB
+Stateless	Yes	Yes	No (state stored on server)
+Use case	Third-party authorization	Microservices	Traditional web apps
+Security	Can expire & refresh	Signed/encoded, may expire	Can scale poorly for many users
+
+Example: Microservices prefer JWT for stateless auth; OAuth2 is used for delegated access.
+
+Q3: How does Spring Security filter chain work?
+
+Spring Security uses a chain of filters that intercepts HTTP requests before reaching controllers. Each filter performs specific tasks, such as:
+
+Authentication (UsernamePasswordAuthenticationFilter)
+
+Authorization (FilterSecurityInterceptor)
+
+CSRF protection (CsrfFilter)
+
+The filters execute in a defined order. If a filter fails, the request may be blocked or redirected. This modular design allows customizing security logic by adding or ordering filters.
+
+Q4: Where do you validate JWT token?
+
+JWT tokens are validated in authentication filters before the request reaches the controller. Typically, a custom filter extracts the token from the Authorization header, verifies the signature, checks expiration, and sets the SecurityContext with user details. Only after successful validation does the request proceed.
+
+Q5: How do you handle token expiration?
+
+Token expiration is handled by:
+
+Short-lived tokens: Tokens are valid for a limited time to reduce security risks.
+
+Refresh tokens: When access tokens expire, clients use a refresh token to obtain a new token without logging in again.
+
+Server-side checks: Reject expired or invalid tokens and return 401 Unauthorized.
+
+Example: JWT expires after 15 minutes; client requests a new token via a refresh endpoint.
+
+Q6: How did you implement role-based access?
+
+I implemented role-based access using Spring Security annotations:
+
+@PreAuthorize("hasRole('ADMIN')") on methods
+
+@Secured({"ROLE_ADMIN", "ROLE_USER"})
+
+Configured roles in the database or authentication server
+This ensures endpoints are accessible only to users with required roles.
+
+Q7: How to secure actuator endpoints?
+
+Actuator endpoints expose sensitive information. I secure them by:
+
+Using management.endpoints.web.exposure.include to expose only required endpoints
+
+Restricting access via HTTP basic auth or role-based access (management.endpoint.health.roles=ADMIN)
+
+Running actuator endpoints behind a firewall or internal network in production
+
+Q8: How do you prevent CSRF in REST APIs?
+
+REST APIs are typically stateless, so CSRF is less of a concern. For web forms, CSRF protection is enabled by Spring Security using CSRF tokens. For REST APIs:
+
+I disable CSRF in Spring Security (csrf().disable())
+
+Use JWT tokens or API keys for authentication, which are not vulnerable to CSRF
+
+Q9: How do you protect APIs from brute-force attacks?
+
+I protect APIs using:
+
+3. Database, JPA & Transactions
+Q1: What happens if two users update the same row at the same time?
+
+When two users try to update the same row concurrently, one of the following can happen depending on the locking strategy:
+
+Without locking: Last update wins, causing lost updates.
+
+With optimistic locking: The second update fails with an exception (OptimisticLockException) if the version number has changed.
+
+With pessimistic locking: The second transaction waits until the first one completes, preventing concurrent updates.
+
+Q2: Difference between Optimistic and Pessimistic locking
+Feature	Optimistic Locking	Pessimistic Locking
+Mechanism	Uses a version field (@Version) to detect conflicts	Locks the row in DB (SELECT ... FOR UPDATE)
+Concurrency	Allows multiple readers/writers, fails on conflict	Serializes access, blocking other transactions
+Performance	High for read-heavy apps	Can cause contention, slower
+Use case	Low-conflict scenarios	High-conflict or critical updates
+Q3: How do you handle transaction rollback in Spring Boot?
+
+Spring Boot handles rollback via @Transactional.
+
+If a method annotated with @Transactional throws a runtime exception, all database changes within that transaction are rolled back.
+
+You can also configure rollback for checked exceptions using rollbackFor:
+
+@Transactional(rollbackFor = IOException.class)
+
+Q4: What happens if an exception occurs inside @Transactional?
+
+If a runtime exception occurs inside a @Transactional method, Spring rolls back the entire transaction, ensuring no partial changes persist. Checked exceptions do not trigger rollback by default unless configured.
+
+Q5: Difference between save() and saveAndFlush()
+
+save(): Saves the entity but does not immediately write to the database; may be delayed until the transaction is committed.
+
+saveAndFlush(): Saves the entity and immediately flushes changes to the database. Useful when subsequent operations depend on the saved data.
+
+Q6: How do you avoid N+1 problem?
+
+The N+1 problem occurs when fetching a collection triggers multiple additional queries.
+Solutions:
+
+Use @EntityGraph or fetch join in JPQL
+
+Configure FetchType.LAZY wisely
+
+Use batch fetching
+
+Example:
+
+SELECT c FROM Customer c JOIN FETCH c.orders
+
+Q7: How do you handle large data pagination?
+
+For large datasets, fetching all rows is inefficient.
+
+Use Spring Data JPA’s Pageable to fetch data in pages
+
+Combine with sorting for consistency
+
+Use streaming queries or JDBC cursors for very large datasets
+
+Page<Customer> customers = customerRepo.findAll(PageRequest.of(0, 50));
+
+Q8: How do you write native queries?
+
+Use @Query with nativeQuery=true in Spring Data JPA:
+
+@Query(value="SELECT * FROM orders WHERE status=:status", nativeQuery=true)
+List<Order> findByStatusNative(@Param("status") String status);
+
+
+Native queries are useful for performance optimization or complex SQL not supported by JPQL.
+
+Q9: How do you improve JPA performance?
+
+Enable lazy loading to avoid unnecessary data fetch
+
+Use batch inserts/updates
+
+Avoid N+1 problems with fetch joins
+
+Use second-level cache for frequently accessed entities
+
+Monitor SQL with Hibernate logging and optimize queries
+
+Q10: How do you handle connection pool issues?
+
+If the connection pool is exhausted:
+
+Increase the max pool size in HikariCP or other pools
+
+Use proper connection closing to avoid leaks
+
+Monitor pool usage with metrics
+
+Reduce transaction duration to free connections faster
+
+spring.datasource.hikari.maximum-pool-size=20
+
+3. Database, JPA & Transactions
+Q1: What happens if two users update the same row at the same time?
+
+When two users try to update the same row concurrently, one of the following can happen depending on the locking strategy:
+
+Without locking: Last update wins, causing lost updates.
+
+With optimistic locking: The second update fails with an exception (OptimisticLockException) if the version number has changed.
+
+With pessimistic locking: The second transaction waits until the first one completes, preventing concurrent updates.
+
+Q2: Difference between Optimistic and Pessimistic locking
+Feature	Optimistic Locking	Pessimistic Locking
+Mechanism	Uses a version field (@Version) to detect conflicts	Locks the row in DB (SELECT ... FOR UPDATE)
+Concurrency	Allows multiple readers/writers, fails on conflict	Serializes access, blocking other transactions
+Performance	High for read-heavy apps	Can cause contention, slower
+Use case	Low-conflict scenarios	High-conflict or critical updates
+Q3: How do you handle transaction rollback in Spring Boot?
+
+Spring Boot handles rollback via @Transactional.
+
+If a method annotated with @Transactional throws a runtime exception, all database changes within that transaction are rolled back.
+
+You can also configure rollback for checked exceptions using rollbackFor:
+
+@Transactional(rollbackFor = IOException.class)
+
+Q4: What happens if an exception occurs inside @Transactional?
+
+If a runtime exception occurs inside a @Transactional method, Spring rolls back the entire transaction, ensuring no partial changes persist. Checked exceptions do not trigger rollback by default unless configured.
+
+Q5: Difference between save() and saveAndFlush()
+
+save(): Saves the entity but does not immediately write to the database; may be delayed until the transaction is committed.
+
+saveAndFlush(): Saves the entity and immediately flushes changes to the database. Useful when subsequent operations depend on the saved data.
+
+Q6: How do you avoid N+1 problem?
+
+The N+1 problem occurs when fetching a collection triggers multiple additional queries.
+Solutions:
+
+Use @EntityGraph or fetch join in JPQL
+
+Configure FetchType.LAZY wisely
+
+Use batch fetching
+
+Example:
+
+SELECT c FROM Customer c JOIN FETCH c.orders
+
+Q7: How do you handle large data pagination?
+
+For large datasets, fetching all rows is inefficient.
+
+Use Spring Data JPA’s Pageable to fetch data in pages
+
+Combine with sorting for consistency
+
+Use streaming queries or JDBC cursors for very large datasets
+
+Page<Customer> customers = customerRepo.findAll(PageRequest.of(0, 50));
+
+Q8: How do you write native queries?
+
+Use @Query with nativeQuery=true in Spring Data JPA:
+
+@Query(value="SELECT * FROM orders WHERE status=:status", nativeQuery=true)
+List<Order> findByStatusNative(@Param("status") String status);
+
+
+Native queries are useful for performance optimization or complex SQL not supported by JPQL.
+
+Q9: How do you improve JPA performance?
+
+Enable lazy loading to avoid unnecessary data fetch
+
+Use batch inserts/updates
+
+Avoid N+1 problems with fetch joins
+
+Use second-level cache for frequently accessed entities
+
+Monitor SQL with Hibernate logging and optimize queries
+
+Q10: How do you handle connection pool issues?
+
+If the connection pool is exhausted:
+
+Increase the max pool size in HikariCP or other pools
+
+Use proper connection closing to avoid leaks
+
+Monitor pool usage with metrics
+
+Reduce transaction duration to free connections faster
+
+spring.datasource.hikari.maximum-pool-size=20
+
+
+If you want, I can continue with the REST API Design section next with full detailed answers for all the questions.
+
+Do you want me to continue?
+
+yed
+
+Perfect! Let’s continue with REST API Design and give long, interview-ready answers for all the questions.
+
+4. REST API Design
+Q1: How do you design a versioned API?
+
+I design versioned APIs using URL versioning (e.g., /api/v1/users) so old clients continue working while new clients use /v2.
+Other approaches include header-based or query parameter versioning, but URL versioning is most readable.
+I maintain separate controllers or handlers per version and clearly document changes.
+
+Q2: Difference between PUT, PATCH, and POST
+Method	Purpose	Idempotent?	Use Case
+POST	Create a new resource	No	Create new user
+PUT	Replace entire resource	Yes	Update user fully
+PATCH	Partially update resource	No (sometimes yes)	Update only user email
+Q3: How do you handle validation errors?
+
+Use @Valid and JSR-303 annotations on request DTOs
+
+Handle errors in a global exception handler (@ControllerAdvice)
+
+Return meaningful error messages with HTTP 400
+
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity<?> handleValidationException(...) { ... }
+
+Q4: How do you handle global exception handling?
+
+I use @ControllerAdvice with @ExceptionHandler methods to catch exceptions across controllers.
+
+Ensures consistent error responses
+
+Can map exceptions to HTTP status codes
+
+Logs errors for monitoring
+
+Q5: How do you secure file uploads?
+
+Limit file size in configuration
+
+Validate file type and content
+
+Store uploads in safe directories, not inside webroot
+
+Scan for malware in sensitive apps
+
+spring.servlet.multipart.max-file-size=5MB
+
+Q6: How do you handle API backward compatibility?
+
+Keep old endpoints working while adding new ones (/v1 vs /v2)
+
+Avoid breaking changes in response payload
+
+Use default values for new fields
+
+Q7: How do you log request and response?
+
+Use Spring filters or interceptors to log HTTP requests/responses
+
+Include headers, payload, status, and timing
+
+In production, log selectively to avoid sensitive data exposure
+
+Q8: How do you prevent SQL injection?
+
+Always use parameterized queries or JPA repository methods
+
+Avoid concatenating SQL strings
+
+Validate input for type and length
+
+@Query("SELECT u FROM User u WHERE u.email = :email")
+User findByEmail(@Param("email") String email);
+
+
+
+Rate limiting at API Gateway or Spring Security
+
+Account lockout after multiple failed login attempts
+
+CAPTCHA for login endpoints
+
+Logging and monitoring suspicious activity
+
+This prevents attackers from guessing passwords or overwhelming the system.
+
+Q10: What is stateless authentication?
+
+Stateless authentication means the server does not store session state. Authentication info is carried in every request, usually via JWT. Benefits:
+
+Scales easily across multiple instances
+
+Reduces server memory usage
+
+Works well with microservices
+
+3. Database, JPA & Transactions
+Q1: What happens if two users update the same row at the same time?
+
+When two users try to update the same row concurrently, one of the following can happen depending on the locking strategy:
+
+Without locking: Last update wins, causing lost updates.
+
+With optimistic locking: The second update fails with an exception (OptimisticLockException) if the version number has changed.
+
+With pessimistic locking: The second transaction waits until the first one completes, preventing concurrent updates.
+
+Q2: Difference between Optimistic and Pessimistic locking
+Feature	Optimistic Locking	Pessimistic Locking
+Mechanism	Uses a version field (@Version) to detect conflicts	Locks the row in DB (SELECT ... FOR UPDATE)
+Concurrency	Allows multiple readers/writers, fails on conflict	Serializes access, blocking other transactions
+Performance	High for read-heavy apps	Can cause contention, slower
+Use case	Low-conflict scenarios	High-conflict or critical updates
+Q3: How do you handle transaction rollback in Spring Boot?
+
+Spring Boot handles rollback via @Transactional.
+
+If a method annotated with @Transactional throws a runtime exception, all database changes within that transaction are rolled back.
+
+You can also configure rollback for checked exceptions using rollbackFor:
+
+@Transactional(rollbackFor = IOException.class)
+
+Q4: What happens if an exception occurs inside @Transactional?
+
+If a runtime exception occurs inside a @Transactional method, Spring rolls back the entire transaction, ensuring no partial changes persist. Checked exceptions do not trigger rollback by default unless configured.
+
+Q5: Difference between save() and saveAndFlush()
+
+save(): Saves the entity but does not immediately write to the database; may be delayed until the transaction is committed.
+
+saveAndFlush(): Saves the entity and immediately flushes changes to the database. Useful when subsequent operations depend on the saved data.
+
+Q6: How do you avoid N+1 problem?
+
+The N+1 problem occurs when fetching a collection triggers multiple additional queries.
+Solutions:
+
+Use @EntityGraph or fetch join in JPQL
+
+Configure FetchType.LAZY wisely
+
+Use batch fetching
+
+Example:
+
+SELECT c FROM Customer c JOIN FETCH c.orders
+
+Q7: How do you handle large data pagination?
+
+For large datasets, fetching all rows is inefficient.
+
+Use Spring Data JPA’s Pageable to fetch data in pages
+
+Combine with sorting for consistency
+
+Use streaming queries or JDBC cursors for very large datasets
+
+Page<Customer> customers = customerRepo.findAll(PageRequest.of(0, 50));
+
+Q8: How do you write native queries?
+
+Use @Query with nativeQuery=true in Spring Data JPA:
+
+@Query(value="SELECT * FROM orders WHERE status=:status", nativeQuery=true)
+List<Order> findByStatusNative(@Param("status") String status);
+
+
+Native queries are useful for performance optimization or complex SQL not supported by JPQL.
+
+Q9: How do you improve JPA performance?
+
+Enable lazy loading to avoid unnecessary data fetch
+
+Use batch inserts/updates
+
+Avoid N+1 problems with fetch joins
+
+Use second-level cache for frequently accessed entities
+
+Monitor SQL with Hibernate logging and optimize queries
+
+Q10: How do you handle connection pool issues?
+
+If the connection pool is exhausted:
+
+Increase the max pool size in HikariCP or other pools
+
+Use proper connection closing to avoid leaks
+
+Monitor pool usage with metrics
+
+Reduce transaction duration to free connections faster
+
+spring.datasource.hikari.maximum-pool-size=20
+
+3. Database, JPA & Transactions
+Q1: What happens if two users update the same row at the same time?
+
+When two users try to update the same row concurrently, one of the following can happen depending on the locking strategy:
+
+Without locking: Last update wins, causing lost updates.
+
+With optimistic locking: The second update fails with an exception (OptimisticLockException) if the version number has changed.
+
+With pessimistic locking: The second transaction waits until the first one completes, preventing concurrent updates.
+
+Q2: Difference between Optimistic and Pessimistic locking
+Feature	Optimistic Locking	Pessimistic Locking
+Mechanism	Uses a version field (@Version) to detect conflicts	Locks the row in DB (SELECT ... FOR UPDATE)
+Concurrency	Allows multiple readers/writers, fails on conflict	Serializes access, blocking other transactions
+Performance	High for read-heavy apps	Can cause contention, slower
+Use case	Low-conflict scenarios	High-conflict or critical updates
+Q3: How do you handle transaction rollback in Spring Boot?
+
+Spring Boot handles rollback via @Transactional.
+
+If a method annotated with @Transactional throws a runtime exception, all database changes within that transaction are rolled back.
+
+You can also configure rollback for checked exceptions using rollbackFor:
+
+@Transactional(rollbackFor = IOException.class)
+
+Q4: What happens if an exception occurs inside @Transactional?
+
+If a runtime exception occurs inside a @Transactional method, Spring rolls back the entire transaction, ensuring no partial changes persist. Checked exceptions do not trigger rollback by default unless configured.
+
+Q5: Difference between save() and saveAndFlush()
+
+save(): Saves the entity but does not immediately write to the database; may be delayed until the transaction is committed.
+
+saveAndFlush(): Saves the entity and immediately flushes changes to the database. Useful when subsequent operations depend on the saved data.
+
+Q6: How do you avoid N+1 problem?
+
+The N+1 problem occurs when fetching a collection triggers multiple additional queries.
+Solutions:
+
+Use @EntityGraph or fetch join in JPQL
+
+Configure FetchType.LAZY wisely
+
+Use batch fetching
+
+Example:
+
+SELECT c FROM Customer c JOIN FETCH c.orders
+
+Q7: How do you handle large data pagination?
+
+For large datasets, fetching all rows is inefficient.
+
+Use Spring Data JPA’s Pageable to fetch data in pages
+
+Combine with sorting for consistency
+
+Use streaming queries or JDBC cursors for very large datasets
+
+Page<Customer> customers = customerRepo.findAll(PageRequest.of(0, 50));
+
+Q8: How do you write native queries?
+
+Use @Query with nativeQuery=true in Spring Data JPA:
+
+@Query(value="SELECT * FROM orders WHERE status=:status", nativeQuery=true)
+List<Order> findByStatusNative(@Param("status") String status);
+
+
+Native queries are useful for performance optimization or complex SQL not supported by JPQL.
+
+Q9: How do you improve JPA performance?
+
+Enable lazy loading to avoid unnecessary data fetch
+
+Use batch inserts/updates
+
+Avoid N+1 problems with fetch joins
+
+Use second-level cache for frequently accessed entities
+
+Monitor SQL with Hibernate logging and optimize queries
+
+Q10: How do you handle connection pool issues?
+
+If the connection pool is exhausted:
+
+Increase the max pool size in HikariCP or other pools
+
+Use proper connection closing to avoid leaks
+
+Monitor pool usage with metrics
+
+Reduce transaction duration to free connections faster
+
+spring.datasource.hikari.maximum-pool-size=20
+
+
+If you want, I can continue with the REST API Design section next with full detailed answers for all the questions.
+
+Do you want me to continue?
+
+yed
+
+Perfect! Let’s continue with REST API Design and give long, interview-ready answers for all the questions.
+
+4. REST API Design
+Q1: How do you design a versioned API?
+
+I design versioned APIs using URL versioning (e.g., /api/v1/users) so old clients continue working while new clients use /v2.
+Other approaches include header-based or query parameter versioning, but URL versioning is most readable.
+I maintain separate controllers or handlers per version and clearly document changes.
+
+Q2: Difference between PUT, PATCH, and POST
+Method	Purpose	Idempotent?	Use Case
+POST	Create a new resource	No	Create new user
+PUT	Replace entire resource	Yes	Update user fully
+PATCH	Partially update resource	No (sometimes yes)	Update only user email
+Q3: How do you handle validation errors?
+
+Use @Valid and JSR-303 annotations on request DTOs
+
+Handle errors in a global exception handler (@ControllerAdvice)
+
+Return meaningful error messages with HTTP 400
+
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity<?> handleValidationException(...) { ... }
+
+Q4: How do you handle global exception handling?
+
+I use @ControllerAdvice with @ExceptionHandler methods to catch exceptions across controllers.
+
+Ensures consistent error responses
+
+Can map exceptions to HTTP status codes
+
+Logs errors for monitoring
+
+Q5: How do you secure file uploads?
+
+Limit file size in configuration
+
+Validate file type and content
+
+Store uploads in safe directories, not inside webroot
+
+Scan for malware in sensitive apps
+
+spring.servlet.multipart.max-file-size=5MB
+
+Q6: How do you handle API backward compatibility?
+
+Keep old endpoints working while adding new ones (/v1 vs /v2)
+
+Avoid breaking changes in response payload
+
+Use default values for new fields
+
+Q7: How do you log request and response?
+
+Use Spring filters or interceptors to log HTTP requests/responses
+
+Include headers, payload, status, and timing
+
+In production, log selectively to avoid sensitive data exposure
+
+Q8: How do you prevent SQL injection?
+
+Always use parameterized queries or JPA repository methods
+
+Avoid concatenating SQL strings
+
+Validate input for type and length
+
+@Query("SELECT u FROM User u WHERE u.email = :email")
+User findByEmail(@Param("email") String email);
+
+Q1: How do you scale a Spring Boot application?
+
+I scale a Spring Boot application horizontally by running multiple instances behind a load balancer, or vertically by increasing CPU/memory.
+
+Horizontal scaling is preferred for stateless microservices.
+
+Container orchestration with Kubernetes makes scaling automatic using HPA (Horizontal Pod Autoscaler).
+
+Ensure statelessness and externalize session state (Redis, DB) for scaling.
+
+Q2: How do you handle high traffic?
+
+Use load balancers to distribute traffic
+
+Implement caching at API or DB layer
+
+Use asynchronous processing with queues for heavy tasks
+
+Tune thread pools and connection pools to handle concurrent requests
+
+Rate limiting to protect services
+
+Q3: How do you cache data?
+
+Use in-memory caching (like ConcurrentHashMap or Caffeine) for fast access to frequently used data
+
+Use distributed cache like Redis or Hazelcast for multi-instance apps
+
+Apply caching at service or repository layer using @Cacheable, @CacheEvict
+
+Q4: Difference between in-memory cache and Redis
+Feature	In-memory	Redis
+Scope	Single instance JVM	Distributed, multi-instance
+Persistence	None	Optional persistence
+Scalability	Limited to JVM memory	Can scale horizontally
+Use case	Local caching	Shared cache for microservices
+Q5: How do you tune JVM for Spring Boot?
+
+Adjust heap size (-Xmx, -Xms) based on app load
+
+Enable garbage collection logs for monitoring
+
+Use G1 or ZGC GC for low-latency applications
+
+Monitor memory usage to avoid GC pauses
+
+Q6: How do you reduce startup time?
+
+Exclude unused auto-configurations
+
+Use lazy initialization (spring.main.lazy-initialization=true)
+
+Limit component scanning to necessary packages
+
+Optimize logging and avoid unnecessary listeners
+
+Q7: How do you avoid memory leaks?
+
+Close all resources (DB connections, streams)
+
+Avoid static references to large objects
+
+Use profilers (VisualVM, JProfiler) to detect leaks
+
+Limit caching with TTL and eviction policies
+
+Q8: What is connection pooling?
+
+Connection pooling is reusing database connections instead of opening/closing them for each request.
+
+Improves performance and reduces overhead
+
+Configured with HikariCP in Spring Boot by default
+
+Q9: How do you handle thread pools?
+
+Use @Async with TaskExecutor for asynchronous tasks
+
+Configure core pool size, max pool size, and queue capacity
+
+Monitor for thread starvation or long-running tasks
+
+@Bean
+public ThreadPoolTaskExecutor taskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(10);
+    executor.setMaxPoolSize(50);
+    executor.setQueueCapacity(200);
+    return executor;
+}
+
+Q10: How do you profile a slow API?
+
+Enable SQL logging to check DB query times
+
+Use Spring Boot Actuator for metrics
+
+Use profilers (JVisualVM, Flight Recorder)
+
+Use distributed tracing (Zipkin/Sleuth) to see which microservice or layer is slow
+
+If you want, we can continue with the Production & DevOps section next, giving long, interview-ready answers for all questions.
+
+Do you want me to proceed?
+
+yes
+
+Perfect! Let’s go through Production & DevOps with long, interview-ready answers for all questions.
+
+6. Production & DevOps
+Q1: What is blue-green deployment?
+
+Blue-green deployment is a strategy to achieve zero-downtime releases.
+
+Two identical environments: Blue (current) and Green (new version).
+
+Deploy the new version to Green, test it, then switch the load balancer to point to Green.
+
+If something fails, traffic can quickly switch back to Blue.
+
+Ensures continuous availability for users during deployments.
+
+Q2: How do you externalize configuration?
+
+Externalizing configuration means keeping environment-specific settings outside the codebase.
+
+Use application.properties / application.yml with profiles (dev, test, prod)
+
+Environment variables
+
+Spring Cloud Config Server or AWS Parameter Store
+
+This ensures deployments can adapt to different environments without changing code.
+
+Q3: How do you manage secrets?
+
+Store sensitive values (DB passwords, API keys) outside code
+
+Use Vault, AWS Secrets Manager, or Parameter Store
+
+Inject secrets at runtime via environment variables or Spring Cloud Config with encryption
+
+Never commit secrets in version control
+
+Q4: How do you monitor Spring Boot app?
+
+Use Spring Boot Actuator for health, metrics, and endpoints
+
+Centralized logging (ELK Stack, Splunk)
+
+Application Performance Monitoring (APM) tools like New Relic, AppDynamics, or Prometheus + Grafana
+
+Alerts on latency, errors, memory usage, or CPU
+
+Q5: How do you do zero-downtime deployment?
+
+Blue-green deployment or rolling updates
+
+Use load balancers to drain traffic from old instances gradually
+
+Ensure stateless services so requests aren’t lost
+
+Canary deployments help test new versions with a subset of users
+
+Q6: How do you log in production?
+
+Use structured logging (JSON) for easier parsing
+
+Use log aggregation tools (ELK Stack, Splunk, Datadog)
+
+Separate error, info, and debug logs
+
+Avoid logging sensitive info like passwords or tokens
+
+Rotate logs to prevent disk overflow

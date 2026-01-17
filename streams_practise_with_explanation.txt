@@ -1,0 +1,28 @@
+Last repeating character using streams
+
+ find the result.Javaimport java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class LastNonRepeating {
+    public static void main(String[] args) {
+        String input = "JavaStreamJ";
+
+        Character result = input.chars()
+            .mapToObj(c -> (char) c) // Convert IntStream to Stream<Character>
+            .collect(Collectors.groupingBy(
+                Function.identity(), 
+                LinkedHashMap::new, 
+                Collectors.counting()
+            )) // Step 1: Create an ordered frequency map
+            .entrySet().stream()
+            .filter(entry -> entry.getValue() == 1L) // Step 2: Keep only uniques
+            .map(Map.Entry::getKey)
+            .reduce((first, second) -> second) // Step 3: Get the last one
+            .orElse(null);
+
+        System.out.println("Last non-repeating character: " + result);
+    }
+}
+2. The Optimized "One-Liner" ExplainedIf an interviewer asks how to optimize this, you can explain that the logic remains $O(n)$ because we must read the whole string to know if the very first character repeats later on.Line-by-Line Breakdown:input.chars(): Converts the String into an IntStream. Computers see characters as numbers (e.g., 'A' is 65)..mapToObj(c -> (char) c): We wrap those numbers into Character objects so we can use them in a Map..collect(groupingBy(...)):Function.identity(): The character itself is the "Key".LinkedHashMap::new: This is critical. A normal HashMap is like a bucket where items get scrambled. A LinkedHashMap is like a line (queue); it remembers that 'J' came before 'a'.Collectors.counting(): This is the "Value". It increments a counter every time it sees the same key..entrySet().stream(): We take our finished map and turn it back into a stream of pairs (Key + Count)..filter(entry -> entry.getValue() == 1L): We throw away any character that has a count higher than 1..reduce((first, second) -> second):Imagine the unique characters are [v, S, t, r, e, m].It takes v and S, keeps S.It takes S and t, keeps t.It continues until only m (the last one) remains.
