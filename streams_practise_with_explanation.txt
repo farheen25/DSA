@@ -1,3 +1,66 @@
+refresher:
+intermediate operations
+Common Stream<T> intermediate methods
+filter(Predicate)
+map(Function)
+flatMap(Function)
+distinct()
+sorted()
+sorted(Comparator)
+peek(Consumer)
+limit(long)
+skip(long)
+takeWhile(Predicate)        // Java 9+
+dropWhile(Predicate)        // Java 9+
+Primitive streams (IntStream, LongStream, DoubleStream)
+mapToInt()
+mapToLong()
+mapToDouble()
+boxed()
+
+A) Terminal methods returning Optional
+findFirst()
+findAny()
+min(Comparator)
+max(Comparator)
+reduce(BinaryOperator) 
+
+B) Terminal methods returning a value
+count()                    // long
+collect(Collector)         // List, Set, Map, etc.
+reduce(identity, accumulator)
+reduce(identity, accumulator, combiner)
+toArray()
+sum()      // primitive streams
+average()  // OptionalDouble
+min()      // OptionalInt, OptionalLong, OptionalDouble (primitive streams)
+max()  // OptionalInt, OptionalLong, OptionalDouble (primitive streams)
+
+Terminal methods returning boolean
+anyMatch(Predicate)
+allMatch(Predicate)
+noneMatch(Predicate)
+
+Terminal methods returning void
+forEach(Consumer)
+forEachOrdered(Consumer)
+
+3️⃣ Methods that return Optional (IMPORTANT ⭐)
+Stream<T>
+findFirst()
+findAny()
+min()
+max()
+reduce()
+
+Primitive streams
+average()          // OptionalDouble
+min()              // OptionalInt / OptionalLong / OptionalDouble
+max()              // OptionalInt / OptionalLong / OptionalDouble
+findFirst()
+findAny()
+
+
 Last repeating character using streams
 
  find the result.Javaimport java.util.LinkedHashMap;
@@ -26,3 +89,69 @@ public class LastNonRepeating {
     }
 }
 2. The Optimized "One-Liner" ExplainedIf an interviewer asks how to optimize this, you can explain that the logic remains $O(n)$ because we must read the whole string to know if the very first character repeats later on.Line-by-Line Breakdown:input.chars(): Converts the String into an IntStream. Computers see characters as numbers (e.g., 'A' is 65)..mapToObj(c -> (char) c): We wrap those numbers into Character objects so we can use them in a Map..collect(groupingBy(...)):Function.identity(): The character itself is the "Key".LinkedHashMap::new: This is critical. A normal HashMap is like a bucket where items get scrambled. A LinkedHashMap is like a line (queue); it remembers that 'J' came before 'a'.Collectors.counting(): This is the "Value". It increments a counter every time it sees the same key..entrySet().stream(): We take our finished map and turn it back into a stream of pairs (Key + Count)..filter(entry -> entry.getValue() == 1L): We throw away any character that has a count higher than 1..reduce((first, second) -> second):Imagine the unique characters are [v, S, t, r, e, m].It takes v and S, keeps S.It takes S and t, keeps t.It continues until only m (the last one) remains.
+
+2. Given a sentence, find the word that has the highest length
+String str = "I am learning Java Streams API";
+String ans = Arrays.stream(str.split(" ")).max(Comparator.comparing(String::length)).get();
+S.O.P(ans)
+
+3. Remove duplicates from the string and return in the same ordeString str = "dabsadefg";
+String str = "dabsadefg";
+str.chars().distinct().mapToObj(c->(char)c).forEach(System.out::print);
+or
+Arrays.stream(str.split("")).distinct().forEach(System.out::print);
+
+4.  Find the word that has the second highest length
+String str = "I am learning Java Streams API";
+String ans = Arrays.stream(str.split(" "))
+				   .sorted(Comparator.comparing(String::length).reversed())
+				   .skip(1).findFirst().get();
+				 
+5. Find the 2nd highest length word in the given sentence
+String str = "I am learning Java Streams API";
+int ans = Arrays.stream(str.split(" "))
+				.map(x->x.length())
+				.sorted(Comparator.reverseOrder())
+				.skip(1)
+				.findFirst()
+				.get();
+S.O.P(ans);
+
+6. Given a sentence, find the occurrence of each word
+String str = "I am learning Streams API in JAVA JAVA";
+Map<String, Long> map = Arrays.stream(str.split(" "))
+						  .collect(Collectors.groupingBy(x->x, Collectors.counting()));
+S.O.P(map);
+
+7. Given a sentence, find the words with a specified number of vowels
+String str = "I am learning Streams API in JAVA";
+Arrays.stream(str.split(" ")).filter(x->x.replaceAll([^aeiouAEIOU],"").length()==2).forEach(System.out::println);
+						  
+8. Divide given integer list into lists of even and odd numbers
+int arr[] = {1,2,3,4,5,6,7,8};
+List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+List<List<Integer>> checkedList = list.stream().collect(Collectors.groupingBy(x->x%2==0, 				Collectors.toList()))
+.entrySet()
+.map(x->x.getValue())
+.collect(Collectors.toList());
+
+//boxed is used to convert integer primitive to List<Integer>
+// instead of Collectors.groupingBy you can also use Collectors.partitioningBy
+
+9. Given a word, find the occurrence of each character
+String str = "Mississippi";
+Map<Character, Long> result = str.chars().mapToObj(c -> (char)c)
+											.collect(Collectors.groupingBy(c->c, 
+											Collectors.counting()));
+											
+10. Arrange the numbers in Descending/Ascending
+int[] arr = {1,2,3,4,5};
+output: 54321/ 12345
+Arrays.stream(arr).mapToObj(x->x).sorted().forEach(System.out::print);
+Arrays.stream(arr).mapToObj(x->x).sorted(Comparator.reverseOrder()).forEach(System.out::print);
+
+11. Given an array, find the sum of unique elements
+int[] arr = {1,6,7,8,1,1,8,8,7};
+int result = Arrays.stream(arr).distinct().sum();
+S.O.P(result);
+								
