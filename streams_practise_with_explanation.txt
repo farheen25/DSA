@@ -239,4 +239,73 @@ boolean allUnique =
           .distinct()
           .count() == arr.length;
 
+22. Given the string[] group the strings based on the middle character
+String[] str = {"ewe","jji","jhj","kwk","aha"};
+Map<String, List<String>> result = Arrays.stream(str).collect(Collectors.groupingBy(x->x.toString().substring(1,2)));
+S.O.P(result);
+
+23. Find the sum of all the elements in a list.
+List<Integer> num = Arrays.asList(1,2,3,4,5);
+int sum = num.stream().reduce(0,(a,b)->a+b);
+S.O.P(sum);
+
+24. Sort a list of strings in alphabetical order
+List<String> str = Arrays.asList("Zudio", "Puma","Addidas", "Mac", "H&M");
+System.out.println(
+    str.stream()
+       .sorted()
+       .collect(Collectors.joining(", "))
+);
+
+25. Convert a list of integers to a list of their squares
+List<Integer> list = Arrays.asList(1,2,3,4,5);
+System.out.println(list.stream().map(x->x*x).map(String::valueOf).collect(Collectors.joining(",")));
+or
+list.stream().mapToInt(x->x*x).forEach(System.out::print);
+Note: Collectors.joining() → String streams only
+
+26. Find and print the distinct odd numbers
+List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9,9,10);
+list.stream().distinct().filter(x->x%2 !=0).map(String::valueOf).collect(Collectors.joining(", "));
+
+27.  Find the union of two lists of integers 
+
+List<Integer> list1 = Arrays.asList(1,2,3,4,5);
+List<Integer> list2 = Arrays.asList(6,7,8,9,9,10);
+Set<Integer> union = new LinkedHashSet<>(list1);
+union.addAll(list2);
+S.O.P(union);
+or
+List<Integer> result = Stream.concat(list1.stream(), list2.stream()).collect(Collectors.toList());
+
+28.Find the kth smallest element in a list of integers
+k=3
+List<Integer> list = Arrays.asList(7,1,6,2,1,3,4,5);	
+int num = list.stream().sorted().skip(k-1).findFirst().get();
+S.O.P(num);
+
+29. Remove all non-numeric characters from a list
+List<String> list = Arrays.asList("a1b2c3","1a2b3c","123abc");
+String result =
+    list.stream()
+        .map(s -> s.replaceAll("[a-zA-Z]", ""))
+        .collect(Collectors.joining(","));
+
+System.out.println(result);
+Note : What it really means
+a-zA-Z → all alphabets
+^ inside [] → NOT
+[^a-zA-Z] → anything that is NOT an alphabet
+[^0-9]  → anything that is NOT an digit
+
+30. Find and print strings containing only digits
+List<String> list = Arrays.asList("123abc","123","abc","45");
+List<String> ans = list.stream().filter(x-> x.matches("[0-9]+")).collect(Collectors.toList());
+S.O.P(ans);
+
+31.Convert a list of strings to uppercase.
+List<String> list = Arrays.asList("breaking bad","octopus","mine story","bob the builder");
+list.stream().map(x->x.toUpperCase()).forEach(System.out::println);
+
+
 
