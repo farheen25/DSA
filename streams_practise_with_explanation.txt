@@ -209,7 +209,7 @@ int result = IntStream.range(0,arr.length).filter(x->x%2 == 0).map(x->arr[x]).re
 
 19. Write a program to multiply 1st and last element, 2nd and 2nd last element etc
 int[] arr = {4,5,1,2,9,2};
-int result = Integer.range(0, arr.length/2).map(x-> arr[x]*arr[arr.length-x-1]).forEach(System.out::println);
+int result = IntStream.range(0, arr.length/2).map(x-> arr[x]*arr[arr.length-x-1]).forEach(System.out::println);
 
 20. Write a stream program to move all zero’s to beginning of array
 int[] arr = {5,0,1,0,8,0};
@@ -307,5 +307,40 @@ S.O.P(ans);
 List<String> list = Arrays.asList("breaking bad","octopus","mine story","bob the builder");
 list.stream().map(x->x.toUpperCase()).forEach(System.out::println);
 
+Note:
+| Type of `arr`               | How to stream        |
+| --------------------------- | -------------------- |
+| `List`, `Set`, `Collection` | `arr.stream()`       |
+| Array (`String[]`, `int[]`) | `Arrays.stream(arr)` |
 
+32. Calculate the average of all the numbers
+List<Integer> list = Arrays.asList(1,2,3,4,5);
+list.stream().mapToDouble(Integer::doubleValue).average();
 
+33.  Find the intersection of two lists using Java streams 
+List<Integer> list = Arrays.asList(1,2,3,4,5);
+List<Integer> list2 = Arrays.asList(6,2,3,7,8);
+list.stream().filter(list2::contains).collect(Collectors.toList());
+
+34. Find the occurrence of domains using Java streams
+Employee emp = new Employee("Alice", "alice@gmail.com");
+Employee emp1 = new Employee("Mary", "mary@yahoocom");
+Employee emp2 = new Employee("Joe", "joe@gmail.com");
+
+List<Employee> employee = new ArrayList<>();
+employee.add(emp);
+employee.add(emp1);
+employee.add(emp2);
+
+employee.stream().map(x-> x.getEmail().substring(x.getEmail().indexOf('@')))
+				 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting());
+
+35. Fiibonnaci series limit 10
+Stream.Integer(new int[] {0,1} , arr -> new int[] {arr[1], arr[0]+arr[1]}).limit(10).map(x-> a[0]).forEach(System.out::println);
+
+36. Convert list of integers to a list of their squares
+List<Integer> list = Arrays.asList(1,2,3,4,5);
+list.stream().map(x->x*x).collect(Collectors.toList());		 
+
+37. Transform Person object stream into a single string
+video 36 from tomorrow
