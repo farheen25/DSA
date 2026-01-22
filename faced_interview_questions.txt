@@ -7,3 +7,23 @@ Interview questions asked
 6. what is spring.profiles?
 7. use streams and write to returning last non repeating character in a string 
 String str = "Java" return v
+
+TCS
+1. return duplicate numbers from int array program
+2. what is event driven architecture?
+3. how to implement string immutable class?
+4. @SpringBootApplication annotation?
+5. @Primary and @Qualifier?
+6. what is microservices?
+7. What is API gateway?
+8. How to secure API's?
+9. What is load balancing?
+10. how to connect to more than one database?
+11. what is abstract factory design pattern?
+12. abstarct class and interfaces difference?
+13. what is lambda expression?
+14. what is stream API?
+15. what is intermediate and terminal operators?
+16. Have you worked with caching?
+17. Working of concurrent hash map?
+
