@@ -26,4 +26,9 @@ TCS
 15. what is intermediate and terminal operators?
 16. Have you worked with caching?
 17. Working of concurrent hash map?
+18. what is funtional interface?
+19. what is time complexity?
 
+EPAM
+1. List<String> str = {"123abc", "456", "23", "abcd"}; // output : 456, 23
+2. int[] a = {1,2,3,4,6}; missing number // output: 5
