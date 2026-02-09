@@ -344,3 +344,22 @@ list.stream().map(x->x*x).collect(Collectors.toList());
 
 37. Transform Person object stream into a single string
 video 36 from tomorrow
+
+
+Cheat sheet 
+| Conversion           | Method / Example                                    | Notes                   |
+| -------------------- | --------------------------------------------------- | ----------------------- |
+| **String → int**     | `Integer.parseInt("123")`                           | Returns primitive `int` |
+| **String → Integer** | `Integer.valueOf("123")`                            | Returns boxed `Integer` |
+| **String → long**    | `Long.parseLong("12345")`                           | Primitive `long`        |
+| **String → Long**    | `Long.valueOf("12345")`                             | Boxed `Long`            |
+| **String → double**  | `Double.parseDouble("12.34")`                       | Primitive `double`      |
+| **String → Double**  | `Double.valueOf("12.34")`                           | Boxed `Double`          |
+| **int → String**     | `String.valueOf(123)` or `Integer.toString(123)`    | Returns `String`        |
+| **Integer → String** | `String.valueOf(Integer.valueOf(123))`              | Works for any object    |
+| **int → Integer**    | `Integer.valueOf(123)`                              | Boxing                  |
+| **Integer → int**    | `Integer.intValue()`                                | Unboxing                |
+| **double → String**  | `String.valueOf(12.34)` or `Double.toString(12.34)` |                         |
+| **Double → double**  | `Double.doubleValue()`                              | Unboxing                |
+| **String → char[]**  | `"abc".toCharArray()`                               | Returns array of chars  |
+| **char[] → String**  | `new String(charArray)`                             |                         |
